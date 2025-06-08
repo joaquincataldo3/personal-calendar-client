@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LoadingSpinnerComponent],
   styleUrl: './register.component.css',
   standalone: true
 })
@@ -17,6 +19,8 @@ export class RegisterComponent {
   apiError: boolean = false;
 
   apiErrorMessage: string | null = null;
+
+  isLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,16 +38,20 @@ export class RegisterComponent {
     this.apiError = false;
     this.apiErrorMessage = '';
     if (email && password && this.registerForm.valid ) {
-      this.authService.register(email, password).subscribe({
-        next: (res) => {
-          console.log('success')
+    this.authService.register(email, password)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
           this.formSubmitted = false;
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          console.log('success');
         },
         error: (err: any) => {
           this.apiError = true;
-          const {error} = err;
-          this.apiErrorMessage = error.message;
-          this.formSubmitted = false;
+          this.apiErrorMessage = err.error.message;
         }
       });
     }

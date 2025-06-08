@@ -20,6 +20,9 @@
         </div>
       </div>
     
-      <button class="form-btn" type="submit">Register</button>
+      <button class="form-btn" type="submit" *ngIf="!isLoading">Register</button>
+      <app-loading-spinner
+        [isSpinnerActive] = "isLoading"
+      ></app-loading-spinner>
     </form>
 </div>
