@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --red: rgba(231, 22, 22, 0.966);
+    --background: rgb(122, 121, 209);
+    --white: #ffff;
+}
+
+* {
+    font-family: "Asap Condensed", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background);
+}
+
+.input-label-container {
+    margin-bottom: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-label-container input {
+    width: 70%;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    border: 1px solid #cfcfcf;
+    padding: 15px 5px;
+}
+
+.form-btn {
+    width: 74%;
+    padding: 10px 5px;
+    margin: 0 auto;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+    background-color: var(--background);
+    font-size: 16px;
+    color: var(--white);
+    letter-spacing: 2px;
+}
+
+.error-msg {
+    color: var(--red);
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: center;
+}

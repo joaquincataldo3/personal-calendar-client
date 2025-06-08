@@ -1,0 +1,28 @@
+<div class="form-container">
+    <h1>Register form</h1>
+    <p *ngIf="apiError" class="error-msg">{{apiErrorMessage}}</p>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="input-label-container">
+        <input id="email" type="email" formControlName="email" placeholder="Email"/>
+        <div *ngIf="registerForm.get('email')?.invalid && formSubmitted">
+          <p class="error-msg" *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</p>
+          <p class="error-msg" *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</p>
+        </div>
+      </div>
+    
+      <div class="input-label-container">
+        <input id="password" type="password" formControlName="password" placeholder="*****"/>
+        <div *ngIf="registerForm.get('password')?.invalid && formSubmitted">
+          <p class="error-msg" *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</p>
+          <p class="error-msg" *ngIf="registerForm.get('password')?.errors?.['strongPassword']">
+                Password must be at least 8 characters, include one uppercase letter and one special character.
+          </p>
+        </div>
+      </div>
+    
+      <button class="form-btn" type="submit" *ngIf="!isLoading">Register</button>
+      <app-loading-spinner
+        [isSpinnerActive] = "isLoading"
+      ></app-loading-spinner>
+    </form>
+</div>
