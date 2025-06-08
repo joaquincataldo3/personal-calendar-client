@@ -15,4 +15,8 @@ export class AuthService {
   register(email: string, password: string): Observable<IApiResponse> {
     return this.http.post<IApiResponse>(`${this.baseUrl}/register`, { email, password }, { withCredentials: true });
   }
+
+  signIn(email: string, password: string): Observable<IApiResponse> {
+    return this.http.post<IApiResponse>(`${this.baseUrl}/sign-in`, { email, password }, { withCredentials: true });
+  } 
 }
