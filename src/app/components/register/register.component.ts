@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, Validati
 import { AuthService } from '../../services/auth.service';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,8 @@ export class RegisterComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   registerForm = this.formBuilder.group({
@@ -47,7 +49,10 @@ export class RegisterComponent {
       )
       .subscribe({
         next: (res) => {
-          console.log('success');
+          const {statusCode} = res;
+          if(statusCode === 201){
+            // this.router.navigate(['/login']);
+          }
         },
         error: (err: any) => {
           this.apiError = true;
