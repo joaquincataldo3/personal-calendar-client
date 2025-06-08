@@ -1,5 +1,6 @@
 <div class="form-container">
     <h1>Register form</h1>
+    <p *ngIf="apiError" class="error-msg">{{apiErrorMessage}}</p>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
       <div class="input-label-container">
         <input id="email" type="email" formControlName="email" placeholder="Email"/>

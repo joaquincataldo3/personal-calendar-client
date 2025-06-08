@@ -30,7 +30,7 @@ body {
     border: 0;
     outline: 0;
     border: 1px solid #cfcfcf;
-    padding: 10px 5px;
+    padding: 15px 5px;
 }
 
 .form-btn {
@@ -43,12 +43,12 @@ body {
     background-color: var(--background);
     font-size: 16px;
     color: var(--white);
-    letter-spacing: 2spx;
+    letter-spacing: 2px;
 }
 
 .error-msg {
     color: var(--red);
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 8px;
     text-align: center;
 }

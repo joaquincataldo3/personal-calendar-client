@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,14 @@ export class RegisterComponent {
 
   formSubmitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  apiError: boolean = false;
+
+  apiErrorMessage: string | null = null;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   registerForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -21,10 +29,23 @@ export class RegisterComponent {
   });
 
   onSubmit() {
+    const { email, password } = this.registerForm.value;
     this.formSubmitted = true;
-    if (this.registerForm.valid) {
-      const { email, password } = this.registerForm.value;
-      
+    this.apiError = false;
+    this.apiErrorMessage = '';
+    if (email && password && this.registerForm.valid ) {
+      this.authService.register(email, password).subscribe({
+        next: (res) => {
+          console.log('success')
+          this.formSubmitted = false;
+        },
+        error: (err: any) => {
+          this.apiError = true;
+          const {error} = err;
+          this.apiErrorMessage = error.message;
+          this.formSubmitted = false;
+        }
+      });
     }
   }
 
