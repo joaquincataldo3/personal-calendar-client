@@ -39,7 +39,6 @@
   font-weight: bold;
   padding: 8px;
   border-bottom: 1px solid #ccc;
-  background-color: #f9f9f9;
 }
 
 .day-body {
@@ -66,4 +65,8 @@
 
 .day-number {
     font-size: 24px;
+}
+
+.selected-day {
+    background-color: rgb(187, 216, 235);
 }

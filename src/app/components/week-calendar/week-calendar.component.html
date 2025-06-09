@@ -8,12 +8,11 @@
 
   <div class="day-columns">
     <div *ngFor="let day of weekDays" class="day-column">
-     <div class="day-header">
-      
+     <div class="day-header" [ngClass]="{ 'selected-day': isSelectedDay(day, selectedDay) }">
         <p class="day-name">{{ day | date: 'EEE' }}</p>
         <p class="day-number">{{ day.getDate() }}</p>
       </div>
-      <div class="day-body">
+      <div class="day-body" [ngClass]="{ 'selected-day': isSelectedDay(day, selectedDay) }">
         <div *ngFor="let h of hours" class="hour-slot"></div>
         <app-week-event-card
             *ngFor="let event of getPositionedEventsForDay(day)"
