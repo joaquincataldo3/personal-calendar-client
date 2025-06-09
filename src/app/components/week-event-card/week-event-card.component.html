@@ -1,1 +1,6 @@
-<p>week-event-card works!</p>
+<div class="event-card">
+  <div class="event-time">
+    {{ event?.start_time | date: 'shortTime' }} - {{ event?.end_time | date: 'shortTime' }}
+  </div>
+  <div class="event-title">{{ event?.title }}</div>
+</div>

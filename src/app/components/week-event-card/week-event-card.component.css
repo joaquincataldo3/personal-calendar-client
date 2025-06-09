@@ -1,0 +1,24 @@
+:host {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  background-color: #e6f0ff;
+  border-left: 4px solid #1e88e5;
+  padding: 4px;
+  font-size: 12px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.event-time {
+  font-weight: bold;
+  font-size: 11px;
+  color: #333;
+}
+
+.event-title {
+  font-size: 12px;
+  color: #000;
+}

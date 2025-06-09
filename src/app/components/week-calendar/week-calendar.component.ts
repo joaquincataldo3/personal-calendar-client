@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
+import { WeekEventCardComponent } from '../week-event-card/week-event-card.component';
 
 @Component({
   selector: 'app-week-calendar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, WeekEventCardComponent],
   templateUrl: './week-calendar.component.html',
   styleUrl: './week-calendar.component.css'
 })
@@ -17,7 +18,6 @@ export class WeekCalendarComponent {
 
     ngOnChanges() {
       if (this.selectedDay) {
-        console.log(this.selectedDay)
         this.generateWeek(this.selectedDay);
       }
     }
@@ -41,7 +41,38 @@ export class WeekCalendarComponent {
         d.setDate(startOfWeek.getDate() + i);
         this.weekDays.push(d);
       }
-      console.log(this.weekDays)
+    }
+
+    getEventsForDay(day: Date): IEvent[] {
+      return this.events.filter(ev => {
+        const evDate = new Date(ev.start_time);
+        return (
+          evDate.getDate() === day.getDate() &&
+          evDate.getMonth() === day.getMonth() &&
+          evDate.getFullYear() === day.getFullYear()
+        );
+      });
+    }
+
+    getEventTopOffset(event: IEvent): number {
+      const start = new Date(event.start_time);
+      return ((start.getHours() * 60 + start.getMinutes()) / (24 * 60)) * 100;
+    }
+
+    getEventHeight(event: IEvent): number {
+       const start = new Date(event.start_time);
+       const end = new Date(event.end_time);
+       const durationInMinutes = (end.getTime() - start.getTime()) / 60000;
+       // max visuable: 1 AM to 11 PM = 1320 minutes
+       const maxVisibleMinutes = 22 * 60;
+       // avoid negative durations
+       const clampedDuration = Math.max(0, durationInMinutes);
+       const percent = (clampedDuration / maxVisibleMinutes) * 100;
+       // 45px as the minimum height, converted to percentage of a 1320px tall container
+       const containerHeightPx = 60 * 22; 
+       const minPercent = (45 / containerHeightPx) * 100;
+
+       return Math.max(percent, minPercent);
     }
 
 }
