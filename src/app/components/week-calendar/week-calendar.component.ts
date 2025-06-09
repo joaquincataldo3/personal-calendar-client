@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-week-calendar',
+  selector: 'app-weekly-calendar',
   standalone: true,
   imports: [],
-  templateUrl: './week-calendar.component.html',
-  styleUrl: './week-calendar.component.css'
+  templateUrl: './weekly-calendar.component.html',
+  styleUrl: './weekly-calendar.component.css'
 })
-export class WeekCalendarComponent {
+export class WeeklyCalendarComponent {
 
 }

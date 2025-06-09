@@ -3,10 +3,10 @@
         <div class="calendar-dashboard-left-column">
             <app-month-calendar
                 [events]="events"
+                (daySelected)="onDaySelected($event)">
             ></app-month-calendar>
         </div>
         <app-week-calendar
-        
         ></app-week-calendar>
     </ng-container>
     <ng-container>

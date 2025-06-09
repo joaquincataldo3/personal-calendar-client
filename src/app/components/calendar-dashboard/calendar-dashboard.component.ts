@@ -25,12 +25,18 @@ export class CalendarDashboardComponent implements OnInit {
 
   isFetchingEvents: boolean = false;
 
+  selectedDay: Date = new Date();
+
   constructor(private eventsService: EventsService){}
 
   ngOnInit(): void {
     this.eventsService.getEvents().subscribe((response: IApiResponse) => {
       this.events = response.data;
     });
+  }
+
+  onDaySelected(day: Date) {
+    this.selectedDay = day;
   }
   
 }
