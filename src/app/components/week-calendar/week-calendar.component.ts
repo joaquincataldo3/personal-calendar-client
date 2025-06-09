@@ -23,6 +23,7 @@ export class WeekCalendarComponent {
     }
 
     ngOnInit() {
+      // starting the hours array from 23 positions (for the 23 visible hours in calendar)
       this.hours = Array.from({ length: 23 }, (_, i) => {
         const hour = i + 1;
         const suffix = hour >= 12 ? 'PM' : 'AM';
