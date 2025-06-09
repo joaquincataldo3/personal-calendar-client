@@ -61,7 +61,7 @@ export class WeekCalendarComponent {
     // calculates de vertifcal offset from the top
     // based on a visible range from 1 am to 11 pm
     getEventTopOffset(event: IEvent): number {
-      const start = new Date(event.start_time);
+      const start = toLocalDate(event.start_time);
       const minutesFrom1AM = (start.getHours() * 60 + start.getMinutes()) - 60; 
       const maxVisibleMinutes = 22 * 60; 
 

@@ -9,6 +9,7 @@
   <div class="day-columns">
     <div *ngFor="let day of weekDays" class="day-column">
      <div class="day-header">
+      
         <p class="day-name">{{ day | date: 'EEE' }}</p>
         <p class="day-number">{{ day.getDate() }}</p>
       </div>
