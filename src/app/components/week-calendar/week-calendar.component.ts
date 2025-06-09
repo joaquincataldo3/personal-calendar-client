@@ -64,7 +64,7 @@ export class WeekCalendarComponent {
     getEventTopOffset(event: IEvent): number {
       const start = toLocalDate(event.start_time);
       const minutesFrom1AM = Math.max(0, (start.getHours() * 60 + start.getMinutes()) - 60); 
-      const maxVisibleMinutes = 22 * 60; // 1 AM to 11 PM
+      const maxVisibleMinutes = 22 * 60;
 
       return (minutesFrom1AM / maxVisibleMinutes) * 100;
     }
