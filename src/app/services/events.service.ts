@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class EventsService {
 
-  private baseUrl = 'http://localhost:3050/api/events';
+  private baseUrl = 'http://localhost:3050/api/event';
 
   constructor(private http: HttpClient) {}
 
   getEvents(): Observable<IApiResponse> {
-    return this.http.get<IApiResponse>(`${this.baseUrl}`);
+    return this.http.get<IApiResponse>(`${this.baseUrl}`, {withCredentials: true});
   }
 }

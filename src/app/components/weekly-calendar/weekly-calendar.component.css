@@ -1,0 +1,32 @@
+:host {
+    display: block;
+    height: 45%;
+    padding: 10px 0;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.month, .year, .arrow {
+    font-size: 25px;
+}
+
+.year {
+    color: var(--light-red);
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+.left-right-buttons-container {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.month, .left-right-buttons-container i {
+    color: var(--white);
+}

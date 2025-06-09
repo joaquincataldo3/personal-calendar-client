@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IEvent } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-weekly-calendar',
@@ -8,5 +9,18 @@ import { Component } from '@angular/core';
   styleUrl: './weekly-calendar.component.css'
 })
 export class WeeklyCalendarComponent {
+  @Input() events: IEvent[] = [];
+  monthName = '';
+  yearLabel = '';
+  currentDate = new Date();
 
+  ngOnInit() {
+    this.updateHeader();
+  }
+
+  updateHeader(): void {
+    this.monthName = this.currentDate.toLocaleString('en-US', { month: 'long' });
+    this.yearLabel = this.currentDate.getFullYear().toString();
+  }
+  
 }

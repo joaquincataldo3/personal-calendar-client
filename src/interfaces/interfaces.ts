@@ -8,6 +8,7 @@ export interface IEvent {
     title: string;
     user_id: number;
     description?: string;
-    event_date: Date;
+    start_time: Date;
+    end_time: Date;
     created_at: Date;
 }

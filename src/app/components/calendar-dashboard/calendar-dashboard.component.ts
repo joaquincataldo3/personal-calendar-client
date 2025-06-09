@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WeeklyCalendarComponent } from '../weekly-calendar/weekly-calendar.component';
 import { MonthlyCalendarComponent } from '../monthly-calendar/monthly-calendar.component';
 import { EventsService } from '../../services/events.service';
-import { IEvent } from '../../../interfaces/interfaces';
+import { IApiResponse, IEvent } from '../../../interfaces/interfaces';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { CommonModule } from '@angular/common';
 
@@ -28,7 +28,9 @@ export class CalendarDashboardComponent implements OnInit {
   constructor(private eventsService: EventsService){}
 
   ngOnInit(): void {
-      
+    this.eventsService.getEvents().subscribe((response: IApiResponse) => {
+      this.events = response.data;
+    });
   }
   
 }

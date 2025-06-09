@@ -51,7 +51,7 @@ export class SignInComponent {
         next: (res: IApiResponse) => {
            const {statusCode} = res;
            if(statusCode === 200){
-             // this.router.navigate(['/calendar']);
+             this.router.navigate(['/calendar']);
            }
         },
         error: (err: any) => {
