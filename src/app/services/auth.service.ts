@@ -18,5 +18,10 @@ export class AuthService {
 
   signIn(email: string, password: string): Observable<IApiResponse> {
     return this.http.post<IApiResponse>(`${this.baseUrl}/sign-in`, { email, password }, { withCredentials: true });
-  } 
+  }
+  
+  checkAuth(): Observable<IApiResponse> {
+    return this.http.get<IApiResponse>(`${this.baseUrl}/check-user-logged`, { withCredentials: true });
+  }
+  
 }
