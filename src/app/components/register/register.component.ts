@@ -52,7 +52,7 @@ export class RegisterComponent {
         next: (res: IApiResponse) => {
           const {statusCode} = res;
           if(statusCode === 201){
-            // this.router.navigate(['/login']);
+            this.router.navigate(['/sign-in']);
           }
         },
         error: (err: any) => {
