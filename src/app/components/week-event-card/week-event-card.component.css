@@ -12,13 +12,14 @@
   cursor: pointer;
 }
 
+
 .event-time {
-  font-weight: bold;
   font-size: 11px;
-  color: #333;
+  color: #2184da;
 }
 
 .event-title {
   font-size: 12px;
-  color: #000;
+  padding-top: 10px;
+  color: #17568d;
 }
