@@ -16,10 +16,12 @@
       <div class="day-body">
         <div *ngFor="let h of hours" class="hour-slot"></div>
         <app-week-event-card
-          *ngFor="let event of getEventsForDay(day)"
-          [event]="event"
-          [style.top.%]="getEventTopOffset(event)"
-          [style.height.%]="getEventHeight(event)">
+            *ngFor="let event of getPositionedEventsForDay(day)"
+            [event]="event"
+            [style.top.%]="getEventTopOffset(event)"
+            [style.height.%]="getEventHeight(event)"
+            [style.left.%]="event.overlap ? (event.position === 'left' ? 0 : 50) : 0"
+            [style.width.%]="event.overlap ? 50 : 100">
         </app-week-event-card>
       </div>
     </div>

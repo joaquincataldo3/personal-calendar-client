@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IEvent } from '../../../interfaces/interfaces';
+import { IEvent, PositionedEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { WeekEventCardComponent } from '../week-event-card/week-event-card.component';
 import { toLocalDate } from '../../utils/utils';
@@ -45,17 +45,52 @@ export class WeekCalendarComponent {
       }
     }
 
-    getEventsForDay(day: Date): IEvent[] {
-      return this.events.filter(ev => {
+    // returns the events for the passed date
+    // if there is overlapping of two events, one is assigned as right and the other one as left
+    // it assumes just 2 overlapped events (for simplicity)
+    getPositionedEventsForDay(day: Date): PositionedEvent[] {
+      const dayEvents = this.events.filter(ev => {
         const evDate = toLocalDate(ev.start_time);
-        console.log(ev.title)
-        console.log(evDate)
         return (
           evDate.getDate() === day.getDate() &&
           evDate.getMonth() === day.getMonth() &&
           evDate.getFullYear() === day.getFullYear()
         );
       });
+
+      const positionedEvents: PositionedEvent[] = [];
+
+      for (let i = 0; i < dayEvents.length; i++) {
+        const ev1 = dayEvents[i];
+        const ev1Start = new Date(ev1.start_time).getTime();
+        const ev1End = new Date(ev1.end_time).getTime();
+
+        let isOverlapped = false;
+
+        for (let j = 0; j < dayEvents.length; j++) {
+          if (i === j) continue;
+
+          const ev2 = dayEvents[j];
+          const ev2Start = new Date(ev2.start_time).getTime();
+          const ev2End = new Date(ev2.end_time).getTime();
+
+          if (ev1Start < ev2End && ev1End > ev2Start) {
+            isOverlapped = true;
+            positionedEvents.push({ ...ev1, overlap: true, position: 'left' });
+            positionedEvents.push({ ...ev2, overlap: true, position: 'right' });
+            break;
+          }
+        }
+
+        if (!isOverlapped) {
+          positionedEvents.push({ ...ev1, overlap: false, position: 'left' });
+        }
+      }
+
+      // avoid duplicates
+      return positionedEvents.filter(
+        (ev, index, self) => index === self.findIndex(e => e.id === ev.id)
+      );
     }
 
     // calculates de vertifcal offset from the top

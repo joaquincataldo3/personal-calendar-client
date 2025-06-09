@@ -5,6 +5,7 @@ export interface IApiResponse {
 }
 
 export interface IEvent {
+    id: number;
     title: string;
     user_id: number;
     description?: string;
@@ -12,4 +13,9 @@ export interface IEvent {
     end_time: Date;
     created_at: Date;
     overlapIndex?: number;
+}
+
+export interface PositionedEvent extends IEvent {
+    overlap: boolean;
+    position: 'left' | 'right';
 }
