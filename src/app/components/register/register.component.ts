@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { IApiResponse } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-register',
@@ -48,10 +49,10 @@ export class RegisterComponent {
         })
       )
       .subscribe({
-        next: (res) => {
+        next: (res: IApiResponse) => {
           const {statusCode} = res;
           if(statusCode === 201){
-            // this.router.navigate(['/login']);
+            this.router.navigate(['/sign-in']);
           }
         },
         error: (err: any) => {

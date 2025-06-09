@@ -1,0 +1,25 @@
+<div class="form-container">
+  <h1>Sign in</h1>
+   <p *ngIf="apiError" class="error-msg">{{apiErrorMessage}}</p>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="sign-in-form">
+    <div class="input-label-container">
+      <input id="email" type="email" formControlName="email" placeholder="Email" />
+      <div *ngIf="signInForm.get('email')?.invalid && formSubmitted">
+        <p class="error-msg" *ngIf="signInForm.get('email')?.errors?.['required']">Email is required.</p>
+        <p class="error-msg" *ngIf="signInForm.get('email')?.errors?.['email']">Invalid email format.</p>
+      </div>
+    </div>
+
+    <div class="input-label-container">
+      <input id="password" type="password" formControlName="password" placeholder="*****" />
+      <div *ngIf="signInForm.get('password')?.invalid && formSubmitted">
+        <p class="error-msg" *ngIf="signInForm.get('password')?.errors?.['required']">Password is required.</p>
+      </div>
+    </div>
+
+    <button class="form-btn" type="submit" *ngIf="!isLoading">Sign in</button>
+    <app-loading-spinner
+        [isSpinnerActive] = "isLoading"
+      ></app-loading-spinner>
+  </form>
+</div>
