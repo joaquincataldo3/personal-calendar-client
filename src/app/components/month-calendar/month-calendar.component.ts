@@ -15,6 +15,7 @@ export class MonthCalendarComponent {
   yearLabel = '';
   currentDate = new Date();
   days: Date[] = [];
+  selectedDay: Date = new Date();
 
   ngOnInit() {
     this.updateHeader();
@@ -73,6 +74,10 @@ export class MonthCalendarComponent {
     return match;
   });
     return result;
+  }
+
+  selectDay(day: Date) {
+    this.selectedDay = day;
   }
 
   

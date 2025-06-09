@@ -11,10 +11,13 @@
         <div
             *ngFor="let day of days"
             class="day-container"
+            [ngClass]="{'selected': selectedDay?.toDateString() === day.toDateString(), 'outside': day.getMonth() !== currentDate.getMonth()}"
+            [class.selected]="selectedDay?.toDateString() === day.toDateString()"
             [class.outside]="day.getMonth() !== currentDate.getMonth()"
+            (click)="selectDay(day)"
         >
-        <p>{{ day.getDate() }}</p>
-        <span *ngIf="hasEvents(day)" class="dot"></span>
+        <p class="day-number">{{ day.getDate() }}</p>
+        <span *ngIf="hasEvents(day)" class="dot" [ngClass]="{'selected-dot': selectedDay?.toDateString() === day.toDateString()}"></span>
     </div>
 </div>
 </div>

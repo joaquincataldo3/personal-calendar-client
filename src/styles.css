@@ -4,6 +4,7 @@
     --white: #ffff;
     --black: #1E1E21ff;
     --light-red: rgb(253, 54, 54);
+    --selected: rgb(42, 148, 247);
 }
 
 * {
@@ -53,4 +54,9 @@ body {
     font-size: 14px;
     margin-top: 8px;
     text-align: center;
+}
+
+.day-number {
+    font-size: 14px;
+    color: var(--white);
 }
