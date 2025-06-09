@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +16,7 @@ export class MonthCalendarComponent {
   currentDate = new Date();
   days: Date[] = [];
   selectedDay: Date = new Date();
+  @Output() daySelected = new EventEmitter<Date>();
 
   ngOnInit() {
     this.updateHeader();
@@ -88,6 +89,9 @@ export class MonthCalendarComponent {
       this.updateHeader();
       this.generateDays();
     }
+
+    // emit event for weekly calendar
+    this.daySelected.emit(day);
   }
 
   
