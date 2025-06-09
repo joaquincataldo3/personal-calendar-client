@@ -78,6 +78,16 @@ export class MonthCalendarComponent {
 
   selectDay(day: Date) {
     this.selectedDay = day;
+
+    const isOutsideMonth = day.getMonth() !== this.currentDate.getMonth() || day.getFullYear() !== this.currentDate.getFullYear();
+
+    // i need to check if it's outside the month range
+    // since i generate the full month and two weeks after it
+    if (isOutsideMonth) {
+      this.currentDate = new Date(day); 
+      this.updateHeader();
+      this.generateDays();
+    }
   }
 
   
