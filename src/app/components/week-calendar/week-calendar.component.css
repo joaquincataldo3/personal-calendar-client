@@ -18,7 +18,7 @@
 }
 
 .hour-label {
-  height: 75px;
+  height: 70px;
   font-size: 12px;
   color: #666;
   line-height: 60px;
@@ -35,6 +35,7 @@
 }
 
 .day-header {
+    height: 60px;
   font-weight: bold;
   padding: 8px;
   border-bottom: 1px solid #ccc;
@@ -49,12 +50,12 @@
 }
 
 .hour-slot {
-  height: 60px;
+  height: 70px;
   border-bottom: 1px solid #eee;
 }
 
 .time-column-header {
-  height: 75px; 
+  height: 60px; 
   border-bottom: 1px solid #ccc;
 }
 
