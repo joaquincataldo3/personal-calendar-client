@@ -60,16 +60,16 @@ export class WeekCalendarComponent {
 
     // calculates de vertifcal offset from the top
     // based on a visible range from 1 am to 11 pm
+    // events from 12 am to 1 am will be placed in 1 am slot
     getEventTopOffset(event: IEvent): number {
       const start = toLocalDate(event.start_time);
-      const minutesFrom1AM = (start.getHours() * 60 + start.getMinutes()) - 60; 
-      const maxVisibleMinutes = 22 * 60; 
+      const minutesFrom1AM = Math.max(0, (start.getHours() * 60 + start.getMinutes()) - 60); 
+      const maxVisibleMinutes = 22 * 60; // 1 AM to 11 PM
 
       return (minutesFrom1AM / maxVisibleMinutes) * 100;
     }
 
     getEventHeight(event: IEvent): number {
-      console.log(event)
       const start = toLocalDate(event.start_time);
       const end = toLocalDate(event.end_time);
 
@@ -88,7 +88,7 @@ export class WeekCalendarComponent {
 
       // 45px as the minimum height, converted to percentage of a 1320px tall container
       const containerHeightPx = 60 * 22; 
-      const minPercent = (45 / containerHeightPx) * 100;
+      const minPercent = (35 / containerHeightPx) * 100;
 
       return Math.max(percent, minPercent);
     }
