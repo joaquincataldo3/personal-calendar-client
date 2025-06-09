@@ -15,6 +15,8 @@
     font-size: 25px;
 }
 
+
+
 .year {
     color: var(--light-red);
     margin-left: 5px;
@@ -27,16 +29,21 @@
     align-items: center;
 }
 
-.month, .left-right-buttons-container i {
+.month, .arrow {
     color: var(--white);
+}
+
+.arrow {
+    cursor: pointer;
 }
 
 .calendar-grid {
   margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 10px;
   text-align: center;
+  padding: 0 5px;
 }
 
 .outside {

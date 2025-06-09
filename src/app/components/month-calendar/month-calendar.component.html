@@ -3,8 +3,8 @@
         <span class="month">{{ monthName }}</span>
         <span class="year">{{ yearLabel }}</span>
         <div class="left-right-buttons-container">
-            <i class='bx  bx-caret-left arrow'  ></i> 
-            <i class='bx  bx-caret-right arrow'></i> 
+            <i class='bx  bx-caret-left arrow' (click)="prevMonth()"></i> 
+            <i class='bx  bx-caret-right arrow' (click)="nextMonth()"></i> 
         </div>
     </div>
     <div class="calendar-grid">
