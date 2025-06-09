@@ -19,8 +19,11 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
       return true; 
     }),
     catchError(() => {
-      router.navigate(['/sign-in']); 
-      return of(false);
+      const currentUrl = state.url;
+      if (currentUrl !== '/sign-in' && currentUrl !== '/register') {
+        router.navigate(['/sign-in']);
+      }
+      return of(true);
     })
   );
 };
