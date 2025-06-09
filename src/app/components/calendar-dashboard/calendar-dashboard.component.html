@@ -1,13 +1,13 @@
 <div class="calendar-dashboard-container">
     <ng-container *ngIf="!isFetchingEvents">
         <div class="calendar-dashboard-left-column">
-            <app-weekly-calendar
+            <app-month-calendar
                 [events]="events"
-            ></app-weekly-calendar>
+            ></app-month-calendar>
         </div>
-        <app-monthly-calendar
+        <app-week-calendar
         
-        ></app-monthly-calendar>
+        ></app-week-calendar>
     </ng-container>
     <ng-container>
 

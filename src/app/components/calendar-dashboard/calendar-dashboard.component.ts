@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WeeklyCalendarComponent } from '../weekly-calendar/weekly-calendar.component';
-import { MonthlyCalendarComponent } from '../monthly-calendar/monthly-calendar.component';
+import { MonthCalendarComponent } from '../month-calendar/month-calendar.component';
+import { WeekCalendarComponent } from '../week-calendar/week-calendar.component';
 import { EventsService } from '../../services/events.service';
 import { IApiResponse, IEvent } from '../../../interfaces/interfaces';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-calendar-dashboard',
   standalone: true,
-  imports: [CommonModule, WeeklyCalendarComponent, MonthlyCalendarComponent, LoadingSpinnerComponent],
+  imports: [CommonModule, MonthCalendarComponent, WeekCalendarComponent, LoadingSpinnerComponent],
   templateUrl: './calendar-dashboard.component.html',
   styleUrl: './calendar-dashboard.component.css'
 })

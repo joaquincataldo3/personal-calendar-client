@@ -3,13 +3,13 @@ import { IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-weekly-calendar',
+  selector: 'app-month-calendar',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './weekly-calendar.component.html',
-  styleUrl: './weekly-calendar.component.css'
+  templateUrl: './month-calendar.component.html',
+  styleUrl: './month-calendar.component.css'
 })
-export class WeeklyCalendarComponent {
+export class MonthCalendarComponent {
   @Input() events: IEvent[] = [];
   monthName = '';
   yearLabel = '';
@@ -27,7 +27,7 @@ export class WeeklyCalendarComponent {
   }
 
   // generates a list of 6 full weeks starting from the last sunday before
-  // this allows the calendar grid to be consistent
+  // this allows the wcalendar grid to be consistent
   generateDays(): void {
     this.days = [];
 
