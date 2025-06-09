@@ -47,7 +47,9 @@ export class WeekCalendarComponent {
 
     getEventsForDay(day: Date): IEvent[] {
       return this.events.filter(ev => {
-        const evDate = new Date(ev.start_time);
+        const evDate = toLocalDate(ev.start_time);
+        console.log(ev.title)
+        console.log(evDate)
         return (
           evDate.getDate() === day.getDate() &&
           evDate.getMonth() === day.getMonth() &&
@@ -67,6 +69,7 @@ export class WeekCalendarComponent {
     }
 
     getEventHeight(event: IEvent): number {
+      console.log(event)
       const start = toLocalDate(event.start_time);
       const end = toLocalDate(event.end_time);
 

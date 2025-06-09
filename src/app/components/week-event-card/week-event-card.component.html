@@ -1,6 +1,6 @@
 <div class="event-card">
-  <div class="event-time">
-    {{ event?.start_time | date: 'shortTime' }} - {{ event?.end_time | date: 'shortTime' }}
-  </div>
-  <div class="event-title">{{ event?.title }}</div>
+  <p class="event-time">
+     {{ getLocalTimeString(event.start_time) }} - {{ getLocalTimeString(event.end_time) }}
+  </p>
+  <p class="event-title">{{ event.title }}</p>
 </div>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
+import { toLocalDate } from '../../utils/utils';
 
 @Component({
   selector: 'app-week-event-card',
@@ -11,7 +12,14 @@ import { IEvent } from '../../../interfaces/interfaces';
 })
 export class WeekEventCardComponent {
 
-  @Input() event: IEvent | null = null;
+  @Input() event!: IEvent;
 
+  getLocalTimeString(date: string | Date): string {
+    const localDate = toLocalDate(date);
+    return localDate.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
 
 }

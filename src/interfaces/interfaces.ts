@@ -11,4 +11,5 @@ export interface IEvent {
     start_time: Date;
     end_time: Date;
     created_at: Date;
+    overlapIndex?: number;
 }
