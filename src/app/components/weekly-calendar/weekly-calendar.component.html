@@ -7,4 +7,12 @@
             <i class='bx  bx-caret-right arrow'></i> 
         </div>
     </div>
+    <div class="calendar-grid">
+        <div
+            *ngFor="let day of days"
+            [class.outside]="day.getMonth() !== currentDate.getMonth()"
+        >
+        {{ day.getDate() }}
+    </div>
+</div>
 </div>
