@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
+import { toLocalDate } from '../../utils/utils';
 
 @Component({
   selector: 'app-month-calendar',
@@ -65,7 +66,7 @@ export class MonthCalendarComponent {
   // checks if a day has event to render blue dot
   hasEvents(day: Date): boolean {
   const result = this.events.some(ev => {
-    const eventDate = new Date(ev.start_time);
+    const eventDate = toLocalDate(ev.start_time);
 
     const match =
       eventDate.getDate() === day.getDate() &&

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { WeekEventCardComponent } from '../week-event-card/week-event-card.component';
+import { toLocalDate } from '../../utils/utils';
 
 @Component({
   selector: 'app-week-calendar',
@@ -66,8 +67,8 @@ export class WeekCalendarComponent {
     }
 
     getEventHeight(event: IEvent): number {
-      const start = new Date(event.start_time);
-      const end = new Date(event.end_time);
+      const start = toLocalDate(event.start_time);
+      const end = toLocalDate(event.end_time);
 
       const startMinutes = Math.max(60, start.getHours() * 60 + start.getMinutes()); 
       const endMinutes = Math.min(1410, end.getHours() * 60 + end.getMinutes());    
