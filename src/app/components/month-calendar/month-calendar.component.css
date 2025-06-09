@@ -75,3 +75,8 @@
 .selected-dot {
     background-color: var(--white);
 }
+
+.day-number {
+    font-size: 14px;
+    color: var(--white);
+}

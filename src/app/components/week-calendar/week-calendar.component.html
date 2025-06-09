@@ -2,14 +2,15 @@
   <div class="time-column">
     <div class="time-column-header"></div> 
     <div *ngFor="let hour of hours" class="hour-label">
-      {{ hour }}
+        <span>{{ hour }}</span>
     </div>
   </div>
 
   <div class="day-columns">
     <div *ngFor="let day of weekDays" class="day-column">
-      <div class="day-header">
-        {{ day | date: 'EEE dd' }}
+     <div class="day-header">
+        <p class="day-name">{{ day | date: 'EEE' }}</p>
+        <p class="day-number">{{ day.getDate() }}</p>
       </div>
       <div class="day-body">
         <div *ngFor="let h of hours" class="hour-slot"></div>
