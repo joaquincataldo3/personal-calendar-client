@@ -66,19 +66,27 @@ export class WeekCalendarComponent {
     }
 
     getEventHeight(event: IEvent): number {
-       const start = new Date(event.start_time);
-       const end = new Date(event.end_time);
-       const durationInMinutes = (end.getTime() - start.getTime()) / 60000;
-       // max visuable: 1 AM to 11 PM = 1320 minutes
-       const maxVisibleMinutes = 22 * 60;
-       // avoid negative durations
-       const clampedDuration = Math.max(0, durationInMinutes);
-       const percent = (clampedDuration / maxVisibleMinutes) * 100;
-       // 45px as the minimum height, converted to percentage of a 1320px tall container
-       const containerHeightPx = 60 * 22; 
-       const minPercent = (45 / containerHeightPx) * 100;
+      const start = new Date(event.start_time);
+      const end = new Date(event.end_time);
 
-       return Math.max(percent, minPercent);
+      const startMinutes = Math.max(60, start.getHours() * 60 + start.getMinutes()); 
+      const endMinutes = Math.min(1410, end.getHours() * 60 + end.getMinutes());    
+
+      const durationInMinutes = endMinutes - startMinutes;
+
+      // max visualizable: 1 AM to 11 PM = 1320 minutes
+      const maxVisibleMinutes = 22 * 60;
+
+      // avoid negative durations
+      const clampedDuration = Math.max(0, durationInMinutes);
+
+      const percent = (clampedDuration / maxVisibleMinutes) * 100;
+
+      // 45px as the minimum height, converted to percentage of a 1320px tall container
+      const containerHeightPx = 60 * 22; 
+      const minPercent = (45 / containerHeightPx) * 100;
+
+      return Math.max(percent, minPercent);
     }
 
 }
