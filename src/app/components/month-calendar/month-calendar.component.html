@@ -1,4 +1,4 @@
-<div class="calendar-container">
+<div class="calendar-container" *ngIf="events.length > 0">
     <div class="calendar-header">
         <span class="month">{{ monthName }}</span>
         <span class="year">{{ yearLabel }}</span>
@@ -10,9 +10,11 @@
     <div class="calendar-grid">
         <div
             *ngFor="let day of days"
+            class="day-container"
             [class.outside]="day.getMonth() !== currentDate.getMonth()"
         >
-        {{ day.getDate() }}
+        <p>{{ day.getDate() }}</p>
+        <span *ngIf="hasEvents(day)" class="dot"></span>
     </div>
 </div>
 </div>

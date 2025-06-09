@@ -41,11 +41,26 @@
   margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 20px;
   text-align: center;
   padding: 0 5px;
 }
 
 .outside {
   opacity: 0.3;
+}
+
+.day-container {
+    position: relative;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgb(42, 148, 247);
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }

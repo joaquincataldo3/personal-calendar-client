@@ -56,4 +56,24 @@ export class MonthCalendarComponent {
   }
 
   
+  getDateKey(date: Date): string {
+    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  }
+
+  // checks if a day has event to render blue dot
+  hasEvents(day: Date): boolean {
+  const result = this.events.some(ev => {
+    const eventDate = new Date(ev.start_time);
+
+    const match =
+      eventDate.getDate() === day.getDate() &&
+      eventDate.getMonth() === day.getMonth() &&
+      eventDate.getFullYear() === day.getFullYear();
+  
+    return match;
+  });
+    return result;
+  }
+
+  
 }
