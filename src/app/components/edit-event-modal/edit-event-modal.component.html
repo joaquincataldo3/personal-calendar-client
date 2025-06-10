@@ -4,5 +4,27 @@
         <h2 class="modal-title">Edit event</h2>
         <i class='bx  bx-x' (click)="onCancel()"></i> 
     </div>
+    <div class="form-container">
+        <form [formGroup]="eventForm">
+            <div class="input-label-container">
+                <input type="text" formControlName="title">
+            </div>
+            <div class="input-label-container">
+                <input type="text" formControlName="description">
+            </div>
+            <div class="input-label-container">
+                <label>Start time</label>
+                <input type="datetime-local" formControlName="start_time">
+            </div>
+            <div class="input-label-container">
+                <label>End time</label>
+                <input type="datetime-local" formControlName="end_time" />
+            </div>
+        </form>
+    </div>
+    <div class="modal-actions">
+        <button (click)="onEditEvent()">Save</button>
+        <button (click)="onDelete()">Delete</button>
+    </div>
   </div>
 </div>
