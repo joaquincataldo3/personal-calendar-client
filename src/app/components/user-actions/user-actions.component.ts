@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateEventModalComponent } from '../create-event-modal/create-event-modal.component';
-import { IEvent } from '../../../interfaces/interfaces';
+import { IApiResponse, IEvent } from '../../../interfaces/interfaces';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-actions',
@@ -14,7 +16,11 @@ export class UserActionsComponent {
 
   @Output() eventCreated = new EventEmitter<IEvent>();
 
-  constructor(private dialog: MatDialog){}
+  constructor(
+    private dialog: MatDialog, 
+    private authService: AuthService,
+    private router: Router
+  ){}
 
   createEvent(){
     const dialogRef = this.dialog.open(CreateEventModalComponent, {
@@ -27,6 +33,13 @@ export class UserActionsComponent {
   });
   }
 
-  logout(){}
+  logout(){
+    this.authService.logout().subscribe(((response: IApiResponse) => {
+      if(response.statusCode === 200) {
+        window.location.reload();
+        return;
+      }
+    }))
+  }
 
 }

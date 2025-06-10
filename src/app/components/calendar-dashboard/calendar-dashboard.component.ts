@@ -42,13 +42,13 @@ export class CalendarDashboardComponent implements OnInit {
   }
 
   onEventCreated(event: IEvent): void {
-      const localStart = toLocalDate(event.start_time);
+    const localStart = toLocalDate(event.start_time);
 
-      this.events = [...this.events, event].sort((a, b) =>
-        new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
-      );
-      this.selectedDay = localStart;
-    }
+    this.events = [...this.events, event].sort((a, b) =>
+      new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
+    );
+    this.selectedDay = localStart;
+  }
 
   getEvents(): void {
     this.eventsService.getEvents().subscribe((response: IApiResponse) => {
