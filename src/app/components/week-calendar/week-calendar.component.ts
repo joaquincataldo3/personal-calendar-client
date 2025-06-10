@@ -151,13 +151,11 @@ export class WeekCalendarComponent {
         dialogRef.afterClosed().subscribe((result: IEditOrDeleteModalResult) => {
           const {event, action} = result;
           if (event) {
-            if(action === 'EDIT'){
-              const index = this.events.findIndex((ev: IEvent) => ev.id === event.id);
-              if (index !== -1) {
+            const index = this.events.findIndex((ev: IEvent) => ev.id === event.id);
+            if(action === 'EDIT' && index !== -1){
                 this.events[index] = event;
-              }
-            } else {
-              
+            } else if(action === 'DELETE'){
+              this.events = this.events.filter(ev => ev.id !== event.id);
             }
           }
         });

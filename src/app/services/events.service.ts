@@ -26,4 +26,8 @@ export class EventsService {
     }
     return this.http.put<IApiResponse>(`${this.baseUrl}/${id}`, apiObject, {withCredentials: true});
   }
+
+  deleteEvent(eventId: number): Observable<IApiResponse> {
+    return this.http.delete<IApiResponse>(`${this.baseUrl}/${eventId}`, {withCredentials: true})
+  }
 }

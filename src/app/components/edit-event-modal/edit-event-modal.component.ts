@@ -67,10 +67,30 @@ export class EditEventModalComponent {
         this.formSubmitted = false;
       })
     ).subscribe({
-      next: (res: IApiResponse) => {
+      next: () => {
           this.dialogRef.close({
             event: updatedEvent,
             action: 'EDIT'
+          });
+      },
+      error: (err: any) => {
+        this.apiError = true;
+        this.apiErrorMessage = err.error.message;
+      }
+    })
+  }
+
+  onDeleteEvent() {
+    this.isLoading = false;
+    this.eventsService.deleteEvent(this.eventToEdit.id).pipe(
+      finalize(() => {
+        this.isLoading = false;
+      })
+    ).subscribe({
+      next: () => {
+          this.dialogRef.close({
+            event: this.eventToEdit,
+            action: 'DELETE'
           });
       },
       error: (err: any) => {
