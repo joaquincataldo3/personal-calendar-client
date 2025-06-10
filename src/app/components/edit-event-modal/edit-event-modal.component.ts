@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { toDatetimeLocalString } from '../../utils/utils';
 
 @Component({
   selector: 'app-edit-event-modal',
@@ -25,8 +26,8 @@ export class EditEventModalComponent {
     this.eventForm = this.fb.group({
       title: [data.title, Validators.required],
       description: [data.description],
-      start_time: [data.start_time, Validators.required],
-      end_time: [data.end_time, Validators.required]
+      start_time: [toDatetimeLocalString(data.start_time), Validators.required],
+      end_time: [toDatetimeLocalString(data.end_time), Validators.required],
     });
   }
 
