@@ -10,7 +10,6 @@ cd personal-calendar-client
 ```
 
 ### 2 - if not installed, nodejs is necessary (>= 18)
-download from https://nodejs.org
 
 ### 3 - if not installed already, install angular cli
 ```bash
