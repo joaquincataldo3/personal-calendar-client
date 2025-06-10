@@ -63,11 +63,11 @@ export class EditEventModalComponent {
         this.formSubmitted = false;
       })
     ).subscribe({
-      next: () => {
-          this.dialogRef.close({
-            event: updatedEvent,
-            action: 'EDIT'
-          });
+      next: (res) => {
+        this.dialogRef.close({
+          event: updatedEvent,
+          action: 'EDIT'
+        });
       },
       error: (err: any) => {
         this.apiError = true;

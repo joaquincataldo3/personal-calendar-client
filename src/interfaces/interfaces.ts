@@ -31,3 +31,12 @@ export interface ICreateEventData {
     startTime: string;
     endTime: string;
 }
+
+export interface IForecastData {
+        date: Date;
+    label: string;
+    minTemp: number;
+    maxTemp: number;
+    weatherIcon: string;
+    events: IEvent[];
+}

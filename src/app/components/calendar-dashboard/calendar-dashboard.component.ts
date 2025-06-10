@@ -7,11 +7,12 @@ import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.comp
 import { CommonModule } from '@angular/common';
 import { UserActionsComponent } from '../user-actions/user-actions.component';
 import { toLocalDate } from '../../utils/datesHelper';
+import { UpcomingEventsWeatherComponent } from '../upcoming-events-weather/upcoming-events-weather.component';
 
 @Component({
   selector: 'app-calendar-dashboard',
   standalone: true,
-  imports: [CommonModule, MonthCalendarComponent, WeekCalendarComponent, LoadingSpinnerComponent, UserActionsComponent],
+  imports: [CommonModule, MonthCalendarComponent, WeekCalendarComponent, LoadingSpinnerComponent, UserActionsComponent, UpcomingEventsWeatherComponent],
   templateUrl: './calendar-dashboard.component.html',
   styleUrl: './calendar-dashboard.component.css'
 })
