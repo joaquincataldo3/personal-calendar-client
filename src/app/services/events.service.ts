@@ -17,12 +17,12 @@ export class EventsService {
   }
 
   editEvent(eventData: any): Observable<IApiResponse> {
-    const {id, title, description, startTime, endTime} = eventData;
+    const {id, title, description, start_time, end_time} = eventData;
     const apiObject = {
       title, 
       description,
-      startTime,
-      endTime
+      start_time,
+      end_time
     }
     return this.http.put<IApiResponse>(`${this.baseUrl}/${id}`, apiObject, {withCredentials: true});
   }

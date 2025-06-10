@@ -59,8 +59,8 @@ export class CreateEventModalComponent {
     const newEvent = {
       title: formValue.title,
       description: formValue.description,
-      startTime: localDatetimeToUTCString(formValue.start_time),
-      endTime: localDatetimeToUTCString(formValue.end_time)
+      start_time: localDatetimeToUTCString(formValue.start_time),
+      end_time: localDatetimeToUTCString(formValue.end_time)
     };
 
     this.eventsService.createEvent(newEvent).pipe(

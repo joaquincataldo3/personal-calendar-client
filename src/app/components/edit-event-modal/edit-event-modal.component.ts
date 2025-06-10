@@ -31,6 +31,7 @@ export class EditEventModalComponent {
     private eventsService: EventsService,
   ) {
     this.eventToEdit = data;
+    console.log(this.eventToEdit)
     this.eventForm = this.fb.group({
       title: [data.title, Validators.required],
       description: [data.description],
@@ -51,12 +52,11 @@ export class EditEventModalComponent {
     this.isLoading = true;
     const formValue = this.eventForm.value;
     const updatedEvent = {
-      ...this.data, 
-      title: formValue.title,
-      description: formValue.description,
-      startTime: localDatetimeToUTCString(formValue.start_time),
-      endTime: localDatetimeToUTCString(formValue.end_time)
+      ...this.eventToEdit,
+      start_time: localDatetimeToUTCString(formValue.start_time),
+      end_time: localDatetimeToUTCString(formValue.end_time)
     };
+    console.log(updatedEvent)
     this.eventsService.editEvent(updatedEvent).pipe(
       finalize(() => {
         this.isLoading = false;

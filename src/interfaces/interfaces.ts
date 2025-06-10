@@ -28,8 +28,8 @@ export interface IEditOrDeleteModalResult {
 export interface ICreateEventData {
     title: string;
     description?: string;
-    startTime: string;
-    endTime: string;
+    start_time: string;
+    end_time: string;
 }
 
 export interface IForecastData {

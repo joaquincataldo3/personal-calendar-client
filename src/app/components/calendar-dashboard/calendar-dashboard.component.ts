@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MonthCalendarComponent } from '../month-calendar/month-calendar.component';
 import { WeekCalendarComponent } from '../week-calendar/week-calendar.component';
 import { EventsService } from '../../services/events.service';
-import { IApiResponse, IEvent } from '../../../interfaces/interfaces';
+import { IApiResponse, IEditOrDeleteModalResult, IEvent } from '../../../interfaces/interfaces';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { CommonModule } from '@angular/common';
 import { UserActionsComponent } from '../user-actions/user-actions.component';
@@ -55,6 +55,18 @@ export class CalendarDashboardComponent implements OnInit {
     this.eventsService.getEvents().subscribe((response: IApiResponse) => {
       this.events = response.data;
     });
+  }
+  
+  onEventUpdated(updateResult: IEditOrDeleteModalResult): void {
+    const { event, action } = updateResult;
+    if (action === 'EDIT') {
+      const index = this.events.findIndex(e => e.id === event.id);
+      if (index !== -1) {
+        this.events[index] = event;
+      }
+    } else if (action === 'DELETE') {
+      this.events = this.events.filter(ev => ev.id !== event.id);
+    }
   }
   
 }

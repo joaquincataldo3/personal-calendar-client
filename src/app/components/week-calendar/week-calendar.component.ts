@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IEditOrDeleteModalResult, IEvent, PositionedEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { WeekEventCardComponent } from '../week-event-card/week-event-card.component';
@@ -20,6 +20,7 @@ export class WeekCalendarComponent {
     hours: string[] = [];
     isEditModalOpen: boolean = false;
     selectedEvent: IEvent | null = null;
+    @Output() eventUpdated = new EventEmitter<IEditOrDeleteModalResult>();
 
     constructor(private dialog: MatDialog){}
 
@@ -150,13 +151,7 @@ export class WeekCalendarComponent {
 
         dialogRef.afterClosed().subscribe((result: IEditOrDeleteModalResult) => {
           if (result) {
-            const {event, action} = result;
-            const index = this.events.findIndex((ev: IEvent) => ev.id === event.id);
-            if(action === 'EDIT' && index !== -1){
-                this.events[index] = event;
-            } else if(action === 'DELETE'){
-              this.events = this.events.filter(ev => ev.id !== event.id);
-            }
+            this.eventUpdated.emit(result);
           }
         });
     }
