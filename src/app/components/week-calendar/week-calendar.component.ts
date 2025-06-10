@@ -3,6 +3,8 @@ import { IEvent, PositionedEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { WeekEventCardComponent } from '../week-event-card/week-event-card.component';
 import { toLocalDate } from '../../utils/utils';
+import { MatDialog } from '@angular/material/dialog';
+import { EditEventModalComponent } from '../edit-event-modal/edit-event-modal.component';
 
 @Component({
   selector: 'app-week-calendar',
@@ -16,6 +18,10 @@ export class WeekCalendarComponent {
     @Input() events: IEvent[] = [];
     weekDays: Date[] = [];
     hours: string[] = [];
+    isEditModalOpen: boolean = false;
+    selectedEvent: IEvent | null = null;
+
+    constructor(private dialog: MatDialog){}
 
     ngOnChanges() {
       if (this.selectedDay) {
@@ -134,6 +140,20 @@ export class WeekCalendarComponent {
         date1.getMonth() === date2.getMonth() &&
         date1.getFullYear() === date2.getFullYear()
       );
+    }
+
+    openEditModal(event: IEvent): void {
+        const dialogRef = this.dialog.open(EditEventModalComponent, {
+          data: event,
+          width: '400px', // opcional
+        });
+
+        dialogRef.afterClosed().subscribe((result: IEvent | null) => {
+          if (result) {
+            console.log('Evento editado:', result);
+            // acá podrías emitir un Output, hacer una llamada a backend, etc.
+          }
+        });
     }
 
 }

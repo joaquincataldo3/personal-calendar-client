@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
 import { toLocalDate } from '../../utils/utils';
 
@@ -13,6 +13,7 @@ import { toLocalDate } from '../../utils/utils';
 export class WeekEventCardComponent {
 
   @Input() event!: IEvent;
+  @Output() editClicked = new EventEmitter<IEvent>();
 
   getLocalTimeString(date: string | Date): string {
     const localDate = toLocalDate(date);
@@ -20,6 +21,10 @@ export class WeekEventCardComponent {
       hour: '2-digit',
       minute: '2-digit',
     });
+  }
+
+  onEditClick(): void {
+    this.editClicked.emit(this.event);
   }
 
 }
