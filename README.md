@@ -1,7 +1,9 @@
 # calendar app client – assessment
 frontend is built with Angular.
 
-## getting started
+### getting started
+
+### 1 - clone the repository
 ```bash
 git clone https://github.com/joaquincataldo3/personal-calendar-client.git
 cd personal-calendar-client
