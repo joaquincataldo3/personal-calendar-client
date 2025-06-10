@@ -5,7 +5,7 @@
   <div class="actions-title-container">
     <p class="event-title">{{ event.title }}</p>
     <div class="actions-container">
-         <i class='bx bx-plus-circle' *ngIf="event.description"></i> 
+         <i class='bx bx-plus-circle' *ngIf="event.description" (click)="onSeeMoreClick()"></i> 
          <i class='bx bx-edit-alt' (click)="onEditClick()"></i> 
     </div>
   </div>

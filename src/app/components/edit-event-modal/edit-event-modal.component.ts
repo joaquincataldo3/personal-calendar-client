@@ -53,6 +53,7 @@ export class EditEventModalComponent {
     const formValue = this.eventForm.value;
     const updatedEvent = {
       ...this.eventToEdit,
+      description: formValue.description,
       start_time: localDatetimeToUTCString(formValue.start_time),
       end_time: localDatetimeToUTCString(formValue.end_time)
     };

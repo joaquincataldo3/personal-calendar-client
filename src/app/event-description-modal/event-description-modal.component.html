@@ -1,0 +1,11 @@
+<div class="modal-backdrop">
+  <div class="modal">
+    <div class="close-modal">
+        <i class='bx  bx-x' (click)="onCancel()"></i>
+    </div>
+    <h2 class="event-title">{{ event.title }}</h2>
+    <p class="event-info"><strong class="info-label">Date:</strong> {{ event.start_time | date: 'fullDate' }}</p>
+    <p class="event-info"><strong class="info-label">Time:</strong> {{ event.start_time | date: 'shortTime' }} - {{ event.end_time | date: 'shortTime' }}</p>
+    <p class="event-info"><strong class="info-label">Description:</strong>{{ event.description }}</p>
+</div>
+</div>
