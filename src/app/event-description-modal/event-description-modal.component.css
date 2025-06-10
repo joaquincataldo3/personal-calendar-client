@@ -1,0 +1,21 @@
+.event-title {
+    font-size: 20px;
+    text-align: center;
+}
+
+.event-info, .event-title {
+    margin-bottom: 10px;
+}
+
+.info-label {
+    margin-right: 5px;
+}
+
+.close-modal {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close-modal i {
+    font-size: 20px;
+}
