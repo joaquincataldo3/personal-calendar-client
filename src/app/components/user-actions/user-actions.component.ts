@@ -4,6 +4,7 @@ import { CreateEventModalComponent } from '../create-event-modal/create-event-mo
 import { IApiResponse, IEvent } from '../../../interfaces/interfaces';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { UserSettingsComponent } from '../user-settings-modal/user-settings-modal.component';
 
 @Component({
   selector: 'app-user-actions',
@@ -30,7 +31,18 @@ export class UserActionsComponent {
       if(result){
         this.eventCreated.emit(result);
       }
-  });
+    });
+  }
+
+  openUserSettingsModal(){
+    const dialogRef = this.dialog.open(UserSettingsComponent, {
+      width: '400px'
+    })
+    dialogRef.afterClosed().subscribe((result: IEvent) => {
+      if(result){
+        this.eventCreated.emit(result);
+      }
+    });
   }
 
   logout(){

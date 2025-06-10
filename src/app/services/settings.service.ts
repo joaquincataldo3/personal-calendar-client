@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class SettingsService {
 
-  private baseUrl = 'http://localhost:3050/api/auth';
+  private baseUrl = 'http://localhost:3050/api/setting';
 
   constructor(private http: HttpClient) { }
 

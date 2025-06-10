@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SettingsService } from '../../services/settings.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-settings',
-  templateUrl: './user-settings.component.html',
-  styleUrl: './user-settings.component.css',
+  templateUrl: './user-settings-modal.component.html',
+  styleUrl: './user-settings-modal.component.css',
   standalone: true,
-  imports: []
+  imports: [LoadingSpinnerComponent, CommonModule, ReactiveFormsModule]
 })
 export class UserSettingsComponent implements OnInit {
   form!: FormGroup;
@@ -16,6 +18,7 @@ export class UserSettingsComponent implements OnInit {
   languages: { value: string, label: string }[] = [];
   timezones: { value: string, label: string }[] = [];
   locations: { value: string, label: string }[] = [];
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +50,11 @@ export class UserSettingsComponent implements OnInit {
     });
   }
 
-  cancel(): void {
+  onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onUpdateSettings(): void {
+
   }
 }
