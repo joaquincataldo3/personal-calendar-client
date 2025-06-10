@@ -19,3 +19,8 @@ export interface PositionedEvent extends IEvent {
     overlap: boolean;
     position: 'left' | 'right';
 }
+
+export interface IEditOrDeleteModalResult {
+    action: 'EDIT' | 'DELETE'
+    event: IEvent;
+}

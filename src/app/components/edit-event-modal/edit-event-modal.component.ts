@@ -3,14 +3,15 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { IApiResponse, IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { localDatetimeToUTCString, toDatetimeLocalString } from '../../utils/utils';
+import { localDatetimeToUTCString, sameDayValidator, startBeforeEndValidator, toDatetimeLocalString } from '../../utils/datesHelper';
 import { EventsService } from '../../services/events.service';
 import { finalize } from 'rxjs/operators';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-edit-event-modal',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, ReactiveFormsModule],
+  imports: [CommonModule, MatDialogModule, ReactiveFormsModule, LoadingSpinnerComponent],
   templateUrl: './edit-event-modal.component.html',
   styleUrl: './edit-event-modal.component.css'
 })
@@ -35,6 +36,8 @@ export class EditEventModalComponent {
       description: [data.description],
       start_time: [toDatetimeLocalString(data.start_time), Validators.required],
       end_time: [toDatetimeLocalString(data.end_time), Validators.required],
+    }, {
+      validators: [startBeforeEndValidator, sameDayValidator]
     });
   }
 
@@ -47,8 +50,9 @@ export class EditEventModalComponent {
   }
 
   onEditEvent() {
-    if (this.eventForm.invalid) return;
     this.formSubmitted = true;
+    if (this.eventForm.invalid) return;
+    this.isLoading = true;
     const formValue = this.eventForm.value;
     const updatedEvent = {
       ...this.data, 
@@ -64,13 +68,16 @@ export class EditEventModalComponent {
       })
     ).subscribe({
       next: (res: IApiResponse) => {
-          console.log(res)
+          this.dialogRef.close({
+            event: updatedEvent,
+            action: 'EDIT'
+          });
       },
       error: (err: any) => {
-        console.log(err)
+        this.apiError = true;
+        this.apiErrorMessage = err.error.message;
       }
     })
   }
-
 
 }

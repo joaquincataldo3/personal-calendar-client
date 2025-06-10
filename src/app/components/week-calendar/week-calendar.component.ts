@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { IEvent, PositionedEvent } from '../../../interfaces/interfaces';
+import { IEditOrDeleteModalResult, IEvent, PositionedEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { WeekEventCardComponent } from '../week-event-card/week-event-card.component';
-import { toLocalDate } from '../../utils/utils';
+import { toLocalDate } from '../../utils/datesHelper';
 import { MatDialog } from '@angular/material/dialog';
 import { EditEventModalComponent } from '../edit-event-modal/edit-event-modal.component';
 
@@ -145,13 +145,20 @@ export class WeekCalendarComponent {
     openEditModal(event: IEvent): void {
         const dialogRef = this.dialog.open(EditEventModalComponent, {
           data: event,
-          width: '400px', // opcional
+          width: '400px', 
         });
 
-        dialogRef.afterClosed().subscribe((result: IEvent | null) => {
-          if (result) {
-            console.log('Evento editado:', result);
-            // acá podrías emitir un Output, hacer una llamada a backend, etc.
+        dialogRef.afterClosed().subscribe((result: IEditOrDeleteModalResult) => {
+          const {event, action} = result;
+          if (event) {
+            if(action === 'EDIT'){
+              const index = this.events.findIndex((ev: IEvent) => ev.id === event.id);
+              if (index !== -1) {
+                this.events[index] = event;
+              }
+            } else {
+              
+            }
           }
         });
     }

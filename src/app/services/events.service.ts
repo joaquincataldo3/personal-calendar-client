@@ -17,7 +17,6 @@ export class EventsService {
   }
 
   editEvent(eventData: any): Observable<IApiResponse> {
-    console.log(eventData)
     const {id, title, description, startTime, endTime} = eventData;
     const apiObject = {
       title, 
