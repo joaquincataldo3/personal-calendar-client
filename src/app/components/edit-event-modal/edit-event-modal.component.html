@@ -13,18 +13,18 @@
                 <input type="text" formControlName="description">
             </div>
             <div class="input-label-container">
-                <label>Start time</label>
+                <p>Start time</p>
                 <input type="datetime-local" formControlName="start_time">
             </div>
             <div class="input-label-container">
-                <label>End time</label>
+                <p>End time</p>
                 <input type="datetime-local" formControlName="end_time" />
             </div>
         </form>
     </div>
     <div class="modal-actions">
-        <button (click)="onEditEvent()">Save</button>
-        <button (click)="onDelete()">Delete</button>
+        <button (click)="onEditEvent()" class="form-btn">Save</button>
+        <button (click)="onDelete()" class="form-btn delete-btn">Delete</button>
     </div>
   </div>
 </div>
