@@ -63,6 +63,9 @@ export class CalendarDashboardComponent implements OnInit {
       const index = this.events.findIndex(e => e.id === event.id);
       if (index !== -1) {
         this.events[index] = event;
+        const localStart = toLocalDate(event.start_time);
+        this.selectedDay = localStart;
+        this.events = [...this.events];
       }
     } else if (action === 'DELETE') {
       this.events = this.events.filter(ev => ev.id !== event.id);
