@@ -24,3 +24,10 @@ export interface IEditOrDeleteModalResult {
     action: 'EDIT' | 'DELETE'
     event: IEvent;
 }
+
+export interface ICreateEventData {
+    title: string;
+    description?: string;
+    startTime: string;
+    endTime: string;
+}

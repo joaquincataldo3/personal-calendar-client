@@ -149,8 +149,8 @@ export class WeekCalendarComponent {
         });
 
         dialogRef.afterClosed().subscribe((result: IEditOrDeleteModalResult) => {
-          const {event, action} = result;
-          if (event) {
+          if (result) {
+            const {event, action} = result;
             const index = this.events.findIndex((ev: IEvent) => ev.id === event.id);
             if(action === 'EDIT' && index !== -1){
                 this.events[index] = event;
@@ -160,5 +160,6 @@ export class WeekCalendarComponent {
           }
         });
     }
+
 
 }

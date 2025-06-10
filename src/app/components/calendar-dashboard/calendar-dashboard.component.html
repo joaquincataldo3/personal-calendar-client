@@ -1,9 +1,15 @@
 <div class="calendar-dashboard-container">
     <ng-container *ngIf="!isFetchingEvents">
         <div class="calendar-dashboard-left-column">
+            <app-user-actions
+                (eventCreated)="onEventCreated($event)"
+            ></app-user-actions>
+            <!-- month calendar can change selected day but receive it (angular two way binding) -->
             <app-month-calendar
                 [events]="events"
-                (daySelected)="onDaySelected($event)">
+                (daySelected)="onDaySelected($event)"
+                [selectedDay]="selectedDay"
+            >
             ></app-month-calendar>
         </div>
         <app-week-calendar

@@ -16,13 +16,21 @@ export class MonthCalendarComponent {
   yearLabel = '';
   currentDate = new Date();
   days: Date[] = [];
-  selectedDay: Date = new Date();
+  @Input() selectedDay: Date = new Date();
   @Output() daySelected = new EventEmitter<Date>();
 
   ngOnInit() {
     this.updateHeader();
     this.generateDays();
   }
+
+  ngOnChanges() {
+  if (this.selectedDay) {
+    const day = new Date(this.selectedDay);
+
+    this.selectDay(day);
+  }
+}
 
   updateHeader(): void {
     this.monthName = this.currentDate.toLocaleString('en-US', { month: 'long' });

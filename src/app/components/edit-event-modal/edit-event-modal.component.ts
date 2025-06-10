@@ -42,11 +42,7 @@ export class EditEventModalComponent {
   }
 
   onCancel() {
-    this.dialogRef.close();
-  }
-
-  onDelete() {
-
+    this.dialogRef.close(null);
   }
 
   onEditEvent() {
