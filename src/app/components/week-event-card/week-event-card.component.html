@@ -1,0 +1,12 @@
+<div class="event-card">
+  <p class="event-time">
+     {{ getLocalTimeString(event.start_time) }} - {{ getLocalTimeString(event.end_time) }}
+  </p>
+  <div class="actions-title-container">
+    <p class="event-title">{{ event.title }}</p>
+    <div class="actions-container">
+         <i class='bx bx-plus-circle' ></i> 
+         <i class='bx bx-edit-alt' (click)="onEditClick()"></i> 
+    </div>
+  </div>
+</div>

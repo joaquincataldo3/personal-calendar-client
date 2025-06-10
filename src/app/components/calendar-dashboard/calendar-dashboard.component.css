@@ -1,0 +1,17 @@
+.calendar-dashboard-container {
+    width: 90%;
+    height: 70vh;
+    margin: 35px auto;
+    display: flex;
+   
+}
+
+.calendar-dashboard-left-column {
+    width: 20%;
+    background-color: var(--black);
+}
+
+.spinner-container {
+    width: 100%;
+}
+

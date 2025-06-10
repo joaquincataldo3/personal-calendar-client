@@ -1,0 +1,24 @@
+<div class="calendar-dashboard-container">
+    <ng-container *ngIf="!isFetchingEvents">
+        <div class="calendar-dashboard-left-column">
+            <app-month-calendar
+                [events]="events"
+                (daySelected)="onDaySelected($event)">
+            ></app-month-calendar>
+        </div>
+        <app-week-calendar
+            [events]="events"
+            [selectedDay]="selectedDay">
+        ></app-week-calendar>
+    </ng-container>
+    <ng-container>
+
+    </ng-container>
+    <div class="spinner-container" *ngIf="isFetchingEvents">
+        <app-loading-spinner
+            [isSpinnerActive]="isFetchingEvents"
+            [spinnerWidth]="spinnerWidth"
+            [spinnerHeight]="spinnerHeight"
+        ></app-loading-spinner>
+    </div>
+</div>

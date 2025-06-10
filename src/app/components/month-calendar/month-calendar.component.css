@@ -1,0 +1,82 @@
+:host {
+    display: block;
+    height: 45%;
+    padding: 10px 0;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.month, .year, .arrow {
+    font-size: 25px;
+}
+
+
+
+.year {
+    color: var(--light-red);
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+.left-right-buttons-container {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.month, .arrow {
+    color: var(--white);
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+.calendar-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  text-align: center;
+  padding: 0 5px;
+}
+
+.outside {
+  opacity: 0.3;
+}
+
+.day-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgb(42, 148, 247);
+  display: block;
+}
+
+.selected {
+    background-color: var(--selected);
+    border-radius: 40%;
+}
+
+.selected-dot {
+    background-color: var(--white);
+}
+
+.day-number {
+    font-size: 14px;
+    color: var(--white);
+}
