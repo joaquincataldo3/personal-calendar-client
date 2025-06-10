@@ -7,27 +7,22 @@ git clone https://github.com/joaquincataldo3/personal-calendar-client.git
 cd personal-calendar-client
 ```
 
-### 2 - install dependencies
+### 2 - if not installed, nodejs is necessary (>= 18)
 ```bash
 npm install
 ```
 
-### 3 - if not installed, nodejs is necessary (>= 18)
-```bash
-npm install
-```
-
-### 4 - if not installed already, install angular cli
+### 3 - if not installed already, install angular cli
 ```bash
   npm install -g @angular/cli@17.3.17
 ```
 
-### 5 - install dependencies
+### 4 - install dependencies
 ```bash
 npm install
 ```
 
-### 6 - run project
+### 5 - run project
 ```bash
 npm run dev
 ```
