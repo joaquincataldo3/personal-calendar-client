@@ -15,3 +15,8 @@ export const toDatetimeLocalString = (date: string | Date): string => {
 
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
+
+export const localDatetimeToUTCString = (localString: string): string => {
+  const localDate = new Date(localString);
+  return new Date(localDate.getTime() + localDate.getTimezoneOffset() * 60000).toISOString();
+};
