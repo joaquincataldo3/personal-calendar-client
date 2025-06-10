@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
-import { toLocalDate } from '../../utils/utils';
+import { toLocalDate } from '../../utils/datesHelper';
 
 @Component({
   selector: 'app-month-calendar',
@@ -16,13 +16,21 @@ export class MonthCalendarComponent {
   yearLabel = '';
   currentDate = new Date();
   days: Date[] = [];
-  selectedDay: Date = new Date();
+  @Input() selectedDay: Date = new Date();
   @Output() daySelected = new EventEmitter<Date>();
 
   ngOnInit() {
     this.updateHeader();
     this.generateDays();
   }
+
+  ngOnChanges() {
+  if (this.selectedDay) {
+    const day = new Date(this.selectedDay);
+
+    this.selectDay(day);
+  }
+}
 
   updateHeader(): void {
     this.monthName = this.currentDate.toLocaleString('en-US', { month: 'long' });

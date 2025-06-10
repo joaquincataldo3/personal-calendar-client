@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
-import { toLocalDate } from '../../utils/utils';
+import { toLocalDate } from '../../utils/datesHelper';
 
 @Component({
   selector: 'app-week-event-card',

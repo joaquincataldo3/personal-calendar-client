@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiResponse, IEvent } from '../../interfaces/interfaces';
+import { IApiResponse, ICreateEventData, IEvent } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,14 +17,21 @@ export class EventsService {
   }
 
   editEvent(eventData: any): Observable<IApiResponse> {
-    console.log(eventData)
-    const {id, title, description, startTime, endTime} = eventData;
+    const {id, title, description, start_time, end_time} = eventData;
     const apiObject = {
       title, 
       description,
-      startTime,
-      endTime
+      start_time,
+      end_time
     }
     return this.http.put<IApiResponse>(`${this.baseUrl}/${id}`, apiObject, {withCredentials: true});
+  }
+
+  deleteEvent(eventId: number): Observable<IApiResponse> {
+    return this.http.delete<IApiResponse>(`${this.baseUrl}/${eventId}`, {withCredentials: true})
+  }
+
+  createEvent(eventData: ICreateEventData): Observable<IApiResponse> {
+    return this.http.post<IApiResponse>(`${this.baseUrl}`, eventData, {withCredentials: true})
   }
 }

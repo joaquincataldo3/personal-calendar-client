@@ -24,4 +24,7 @@ export class AuthService {
     return this.http.get<IApiResponse>(`${this.baseUrl}/check-user-logged`, { withCredentials: true });
   }
   
+  logout(): Observable<IApiResponse> {
+    return this.http.get<IApiResponse>(`${this.baseUrl}/logout`, {withCredentials: true})
+  }
 }

@@ -1,0 +1,29 @@
+<div class="weather-sidebar">
+  <div class="day-container"  *ngFor="let item of forecastData">
+    <div class="day-header">
+      <div class="day-info">
+        <span class="day-label" [ngClass]="{'selected-day': isToday(item.date)}">{{ item.label.toUpperCase() }}</span>
+        <span class="date-label">{{ item.date | date: 'd/M/yyyy' }}</span>
+      </div>
+      <div class="weather-info">
+        <span class="temp">{{ item.minTemp }}°/{{ item.maxTemp }}°</span>
+        <img class="weather-src" [src]="'https://openweathermap.org/img/wn/' + item.weatherIcon + '@2x.png'" alt="clima">
+      </div>
+    </div>
+    <div class="events-container">
+      <ng-container *ngIf="item.events.length > 0; else noEvents">
+        <div class="event-item" *ngFor="let ev of item.events">
+          <span class="dot"></span>
+          <div class="event-details">
+            <span class="event-time">{{ toLocalDate(ev.start_time) | date: 'h:mm a' }} - {{ toLocalDate(ev.end_time) | date: 'h:mm a' }}</span>
+            <span class="event-title">{{ ev.title }}</span>
+            <small *ngIf="ev.description">{{ ev.description }}</small>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noEvents>
+        <span class="no-events">Sin eventos</span>
+      </ng-template>
+    </div>
+  </div>
+</div>

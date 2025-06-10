@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    height: 3%;
+}
+
+.user-actions-container {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 10px auto;
+}
+
+.user-actions-container i {
+    font-size: 25px;
+    color: var(--white);
+    cursor: pointer;
+}

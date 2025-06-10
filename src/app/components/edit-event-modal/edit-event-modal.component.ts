@@ -3,14 +3,15 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { IApiResponse, IEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { localDatetimeToUTCString, toDatetimeLocalString } from '../../utils/utils';
+import { localDatetimeToUTCString, sameDayValidator, startBeforeEndValidator, toDatetimeLocalString } from '../../utils/datesHelper';
 import { EventsService } from '../../services/events.service';
 import { finalize } from 'rxjs/operators';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-edit-event-modal',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, ReactiveFormsModule],
+  imports: [CommonModule, MatDialogModule, ReactiveFormsModule, LoadingSpinnerComponent],
   templateUrl: './edit-event-modal.component.html',
   styleUrl: './edit-event-modal.component.css'
 })
@@ -30,47 +31,69 @@ export class EditEventModalComponent {
     private eventsService: EventsService,
   ) {
     this.eventToEdit = data;
+    console.log(this.eventToEdit)
     this.eventForm = this.fb.group({
       title: [data.title, Validators.required],
       description: [data.description],
       start_time: [toDatetimeLocalString(data.start_time), Validators.required],
       end_time: [toDatetimeLocalString(data.end_time), Validators.required],
+    }, {
+      validators: [startBeforeEndValidator, sameDayValidator]
     });
   }
 
   onCancel() {
-    this.dialogRef.close();
-  }
-
-  onDelete() {
-
+    this.dialogRef.close(null);
   }
 
   onEditEvent() {
-    if (this.eventForm.invalid) return;
     this.formSubmitted = true;
+    if (this.eventForm.invalid) return;
+    this.isLoading = true;
     const formValue = this.eventForm.value;
     const updatedEvent = {
-      ...this.data, 
-      title: formValue.title,
-      description: formValue.description,
-      startTime: localDatetimeToUTCString(formValue.start_time),
-      endTime: localDatetimeToUTCString(formValue.end_time)
+      ...this.eventToEdit,
+      start_time: localDatetimeToUTCString(formValue.start_time),
+      end_time: localDatetimeToUTCString(formValue.end_time)
     };
+    console.log(updatedEvent)
     this.eventsService.editEvent(updatedEvent).pipe(
       finalize(() => {
         this.isLoading = false;
         this.formSubmitted = false;
       })
     ).subscribe({
-      next: (res: IApiResponse) => {
-          console.log(res)
+      next: (res) => {
+        this.dialogRef.close({
+          event: updatedEvent,
+          action: 'EDIT'
+        });
       },
       error: (err: any) => {
-        console.log(err)
+        this.apiError = true;
+        this.apiErrorMessage = err.error.message;
       }
     })
   }
 
+  onDeleteEvent() {
+    this.isLoading = false;
+    this.eventsService.deleteEvent(this.eventToEdit.id).pipe(
+      finalize(() => {
+        this.isLoading = false;
+      })
+    ).subscribe({
+      next: () => {
+          this.dialogRef.close({
+            event: this.eventToEdit,
+            action: 'DELETE'
+          });
+      },
+      error: (err: any) => {
+        this.apiError = true;
+        this.apiErrorMessage = err.error.message;
+      }
+    })
+  }
 
 }

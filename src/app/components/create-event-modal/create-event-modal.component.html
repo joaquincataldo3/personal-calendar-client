@@ -1,7 +1,7 @@
 <div class="modal-backdrop">
   <div class="modal">
     <div class="title-close-icon-container">
-        <h2 class="modal-title">Edit event</h2>
+        <h2 class="modal-title">Create event</h2>
         <i class='bx  bx-x' (click)="onCancel()"></i> 
     </div>
     <div class="form-container">
@@ -10,7 +10,7 @@
             <div class="input-label-container">
                 <input type="text" formControlName="title">
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.get('title')?.hasError('required')">
-                    Title is required.
+                    Title is required
                 </p>
             </div>
             <div class="input-label-container">
@@ -20,10 +20,10 @@
                 <p>Start time</p>
                 <input type="datetime-local" formControlName="start_time">
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.hasError('notSameDay')">
-                  Start and end time must be on the same day.
+                  Start and end time must be on the same day
                 </p>
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.hasError('startAfterEnd')">
-                    Start time must be before end time.
+                  Start time must be before end time
                 </p>
             </div>
             <div class="input-label-container">
@@ -39,8 +39,8 @@
 
             ></app-loading-spinner>
         </ng-container>
-        <button (click)="onEditEvent()" class="form-btn" *ngIf="!isLoading">Save</button>
-        <button (click)="onDeleteEvent()" class="form-btn delete-btn" *ngIf="!isLoading">Delete</button>
+        <button (click)="onCancel()" class="form-btn cancel-btn" *ngIf="!isLoading">Cancel</button>
+        <button (click)="onCreateEvent()" class="form-btn" *ngIf="!isLoading">Create</button>
     </div>
   </div>
 </div>
