@@ -1,8 +1,8 @@
 <div class="modal-backdrop">
-  <div class="modal">
+  <div class="modal" [ngClass]="{'modal-dark-mode': darkMode}">
     <div class="title-close-icon-container">
-        <h2 class="modal-title">Edit event</h2>
-        <i class='bx  bx-x' (click)="onCancel()"></i> 
+        <h2 class="modal-title" [ngClass]="{'text-dark-mode': darkMode}">Edit event</h2>
+        <i class='bx  bx-x' [ngClass]="{'text-dark-mode': darkMode}" (click)="onCancel()"></i> 
     </div>
     <div class="form-container">
         <p *ngIf="apiError" class="error-msg">{{apiErrorMessage}}</p>
@@ -17,7 +17,7 @@
                 <input type="text" formControlName="description">
             </div>
             <div class="input-label-container">
-                <p>Start time</p>
+                <p [ngClass]="{'label-dark-mode': darkMode}">Start time</p>
                 <input type="datetime-local" formControlName="start_time">
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.hasError('notSameDay')">
                   Start and end time must be on the same day
@@ -27,7 +27,7 @@
                 </p>
             </div>
             <div class="input-label-container">
-                <p>End time</p>
+                <p [ngClass]="{'label-dark-mode': darkMode}">End time</p>
                 <input type="datetime-local" formControlName="end_time" />
             </div>
         </form>

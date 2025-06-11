@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventsService } from '../../services/events.service';
@@ -11,6 +11,7 @@ import {
   localDatetimeToUTCString,
   toDatetimeLocalString
 } from '../../utils/datesHelper';
+import { IUserSetting } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-create-event-modal',
@@ -26,12 +27,17 @@ export class CreateEventModalComponent {
   formSubmitted = false;
   apiError = false;
   apiErrorMessage = '';
+  darkMode: boolean;
+
 
   constructor(
     public dialogRef: MatDialogRef<CreateEventModalComponent>,
     private fb: FormBuilder,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    @Inject(MAT_DIALOG_DATA) public data: IUserSetting
   ) {
+    this.darkMode = data.dark_mode ?? false;
+
     const now = new Date();
     const localNow = toDatetimeLocalString(now);
     const localEnd = toDatetimeLocalString(new Date(now.getTime() + 30 * 60000));

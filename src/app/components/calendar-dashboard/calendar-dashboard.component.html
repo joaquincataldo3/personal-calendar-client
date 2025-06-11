@@ -3,8 +3,9 @@
         <div class="calendar-dashboard-left-column">
             <app-user-actions
                 (eventCreated)="onEventCreated($event)"
+                [ngClass]="{ 'dark-mode': settings?.dark_mode }"
+                [settings]="settings"
             ></app-user-actions>
-            <!-- month calendar can change selected day but receive it (angular two way binding) -->
             <app-month-calendar
                 [events]="events"
                 (daySelected)="onDaySelected($event)"
@@ -16,9 +17,11 @@
             ></app-upcoming-events-weather>
         </div>
         <app-week-calendar
+            [ngClass]="{ 'dark-mode': settings?.dark_mode }"
             [events]="events"
             [selectedDay]="selectedDay"
             (eventUpdated)="onEventUpdated($event)"
+            [settings]="settings"
         >
         ></app-week-calendar>
     </ng-container>

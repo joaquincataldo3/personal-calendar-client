@@ -21,7 +21,9 @@
             [style.height.%]="getEventHeight(event)"
             [style.left.%]="event.overlap ? (event.position === 'left' ? 0 : 50) : 0"
             [style.width.%]="event.overlap ? 50 : 100"
-            (editClicked)="openEditModal($event)">
+            (editClicked)="openEditModal($event)"
+            [darkMode]="darkMode"
+            >
         </app-week-event-card>
       </div>
     </div>

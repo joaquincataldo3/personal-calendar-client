@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { IEvent } from '../../../interfaces/interfaces';
 import { toLocalDate } from '../../utils/datesHelper';
 import { EventDescriptionModalComponent } from '../../event-description-modal/event-description-modal.component';
@@ -18,6 +18,7 @@ export class WeekEventCardComponent {
 
   @Input() event!: IEvent;
   @Output() editClicked = new EventEmitter<IEvent>();
+  @Input() darkMode: boolean = false;
 
   getLocalTimeString(date: string | Date): string {
     const localDate = toLocalDate(date);
@@ -34,7 +35,10 @@ export class WeekEventCardComponent {
   onSeeMoreClick(): void {
     this.dialog.open(EventDescriptionModalComponent, {
       width: '200px',
-      data: this.event
+      data: {
+        event: this.event,
+        darkMode: this.darkMode
+      }
     })
   }
 

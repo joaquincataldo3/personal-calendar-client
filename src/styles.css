@@ -1,10 +1,11 @@
 :root {
     --red: rgba(231, 22, 22, 0.966);
-    --background: rgb(122, 121, 209);
     --white: #ffff;
     --black: #1E1E21ff;
     --light-red: rgb(253, 54, 54);
     --selected: rgb(42, 148, 247);
+    --background: rgb(122, 121, 209);
+    --dark-background: #263238;
 }
 
 * {
@@ -16,6 +17,19 @@
 
 body {
     background-color: var(--background);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.body-dark-mode  {
+    background-color: rgb(59, 9, 59)!important;
+}
+
+.modal-dark-mode {
+    background-color: var(--black)!important;
+}
+
+.label-dark-mode {
+    color: var(--white)
 }
 
 .input-label-container {
@@ -75,7 +89,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .modal {
-  background-color: white;
+  background-color: var(--white);
   padding: 1.5rem;
   border-radius: 10px;
   width: 400px;
@@ -118,7 +132,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .cancel-btn {
-    background-color: #bfbfbf;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.cancel-btn-dark-mode {
+    background-color: rgb(151, 151, 151)!important;
+    color: var(--white)!important;
+}
+
+.text-dark-mode {
+    color: var(--white)!important;
 }
 
 .pre-link-text {

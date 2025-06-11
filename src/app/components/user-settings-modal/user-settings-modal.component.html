@@ -1,13 +1,13 @@
 <div class="modal-backdrop">
-  <div class="modal">
+  <div class="modal" [ngClass]="{'modal-dark-mode': darkMode}">
     <div class="title-close-icon-container">
-        <h2 class="modal-title">Edit settings</h2>
+        <h2 class="modal-title" [ngClass]="{'text-dark-mode': darkMode}">Edit settings</h2>
         <i class='bx bx-x' (click)="onCancel()"></i> 
     </div>
     <div class="form-container">
         <form [formGroup]="form" (ngSubmit)="onUpdateSettings()" class="modal-form">
         <div class="edit-input-label-container">
-            <label>Language</label>
+            <label [ngClass]="{'label-dark-mode': darkMode}">Language</label>
             <select formControlName="language">
                 <option *ngFor="let lang of languages" [value]="lang.value">
                 {{ lang.label }}
@@ -19,7 +19,7 @@
         </div>
 
         <div class="edit-input-label-container">
-            <label>Timezone</label>
+            <label [ngClass]="{'label-dark-mode': darkMode}">Timezone</label>
             <select formControlName="timezone">
                 <option *ngFor="let tz of timezones" [value]="tz.value">
                 {{ tz.label }}
@@ -31,7 +31,7 @@
         </div>
 
         <div class="edit-input-label-container">
-            <label>Location</label>
+            <label [ngClass]="{'label-dark-mode': darkMode}">Location</label>
             <select formControlName="location">
                 <option *ngFor="let loc of locations" [value]="loc.value">
                 {{ loc.label }}
@@ -43,7 +43,7 @@
         </div>
 
         <div class="edit-input-label-container dark-mode-container toggle-container">
-            <label>Dark mode</label>
+            <label [ngClass]="{'label-dark-mode': darkMode}">Dark mode</label>
             <label class="switch">
                 <input type="checkbox" id="dark_mode" formControlName="dark_mode">
                 <span class="slider round"></span>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="actions">
-            <button type="button" *ngIf="!isLoading" class="form-btn cancel-btn" (click)="onCancel()">Cancelar</button>
+            <button type="button" *ngIf="!isLoading" class="form-btn cancel-btn" [ngClass]="{'cancel-btn-dark-mode': darkMode}" (click)="onCancel()">Cancelar</button>
             <button type="submit" *ngIf="!isLoading" class="form-btn">Guardar</button>
         </div>
             <app-loading-spinner

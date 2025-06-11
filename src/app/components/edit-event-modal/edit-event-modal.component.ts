@@ -23,14 +23,16 @@ export class EditEventModalComponent {
   formSubmitted: boolean = false;
   apiError: boolean = false;
   apiErrorMessage: string = '';
+  darkMode: boolean;
 
  constructor(
     public dialogRef: MatDialogRef<EditEventModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IEvent,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private eventsService: EventsService,
   ) {
-    this.eventToEdit = data;
+    this.eventToEdit = data.event;
+    this.darkMode = data.darkMode;
     this.eventForm = this.fb.group({
       title: [data.title, Validators.required],
       description: [data.description],

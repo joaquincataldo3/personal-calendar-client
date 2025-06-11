@@ -14,16 +14,21 @@ import { CommonModule } from '@angular/common';
 export class EventDescriptionModalComponent {
 
   event!: IEvent;
+  darkMode: boolean = false;
 
   constructor(
       public dialogRef: MatDialogRef<EventDescriptionModalComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: IEvent,
+      @Inject(MAT_DIALOG_DATA) public data: any,
   ){
+    const event = data.event;
+    console.log(event)
     this.event = {
-      ...data,
-      start_time: toLocalDate(data.start_time),
-      end_time: toLocalDate(data.end_time)
+      ...event,
+      start_time: toLocalDate(event.start_time),
+      end_time: toLocalDate(event.end_time)
     }
+    console.log(this.event)
+    this.darkMode = data.darkMode;
   }
 
   onCancel(){

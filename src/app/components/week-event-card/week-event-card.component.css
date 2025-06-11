@@ -11,6 +11,18 @@
   overflow: hidden;
 }
 
+:host-context(.dark-mode) {
+  background-color: var(--dark-background);
+  border-left: 4px solid #90caf9;
+}
+
+:host-context(.dark-mode) .event-time {
+  color: #64b5f6;
+}
+
+:host-context(.dark-mode) .event-title {
+  color: #bbdefb;
+}
 
 .event-time {
   font-size: 11px;
@@ -26,6 +38,11 @@
 .actions-title-container {
     display: flex;
     justify-content: space-between;
+}
+
+.actions-container {
+  display: flex;
+  align-items: center;
 }
 
 .actions-container i {

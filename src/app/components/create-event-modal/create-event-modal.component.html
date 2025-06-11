@@ -1,23 +1,23 @@
-<div class="modal-backdrop">
-  <div class="modal">
+<div class="modal-backdrop" >
+  <div class="modal" [ngClass]="{'modal-dark-mode': darkMode}">
     <div class="title-close-icon-container">
-        <h2 class="modal-title">Create event</h2>
-        <i class='bx  bx-x' (click)="onCancel()"></i> 
+        <h2 class="modal-title" [ngClass]="{'text-dark-mode': darkMode}">Create event</h2>
+        <i class='bx  bx-x' [ngClass]="{'text-dark-mode': darkMode}" (click)="onCancel()"></i> 
     </div>
     <div class="form-container">
         <p *ngIf="apiError" class="error-msg">{{apiErrorMessage}}</p>
         <form [formGroup]="eventForm">
             <div class="input-label-container">
-                <input type="text" formControlName="title">
+                <input type="text" formControlName="title" placeholder="title">
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.get('title')?.hasError('required')">
                     Title is required
                 </p>
             </div>
             <div class="input-label-container">
-                <input type="text" formControlName="description">
+                <input type="text" formControlName="description" placeholder="description">
             </div>
             <div class="input-label-container">
-                <p>Start time</p>
+                <p [ngClass]="{'label-dark-mode': darkMode}">Start time</p>
                 <input type="datetime-local" formControlName="start_time">
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.hasError('notSameDay')">
                   Start and end time must be on the same day
@@ -27,7 +27,7 @@
                 </p>
             </div>
             <div class="input-label-container">
-                <p>End time</p>
+                <p [ngClass]="{'label-dark-mode': darkMode}">End time</p>
                 <input type="datetime-local" formControlName="end_time" />
             </div>
         </form>
@@ -39,7 +39,7 @@
 
             ></app-loading-spinner>
         </ng-container>
-        <button (click)="onCancel()" class="form-btn cancel-btn" *ngIf="!isLoading">Cancel</button>
+        <button (click)="onCancel()" class="form-btn cancel-btn" [ngClass]="{'cancel-btn-dark-mode': darkMode}" *ngIf="!isLoading">Cancel</button>
         <button (click)="onCreateEvent()" class="form-btn" *ngIf="!isLoading">Create</button>
     </div>
   </div>
