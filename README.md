@@ -11,7 +11,7 @@ cd personal-calendar-client
 
 ### 2 - if not installed, nodejs is necessary (>= 18)
 
-## 3 - if installed already, uninstall angular cli
+## 3 - if installed already, uninstall angular cli to avoid conflict versions
 ```bash
   npm uninstall -g @angular/cli
 ```
