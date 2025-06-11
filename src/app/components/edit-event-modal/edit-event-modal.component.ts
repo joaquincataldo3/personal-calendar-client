@@ -34,10 +34,10 @@ export class EditEventModalComponent {
     this.eventToEdit = data.event;
     this.darkMode = data.darkMode;
     this.eventForm = this.fb.group({
-      title: [data.title, Validators.required],
-      description: [data.description],
-      start_time: [toDatetimeLocalString(data.start_time), Validators.required],
-      end_time: [toDatetimeLocalString(data.end_time), Validators.required],
+      title: [this.eventToEdit.title, Validators.required],
+      description: [this.eventToEdit.description],
+      start_time: [toDatetimeLocalString(this.eventToEdit.start_time), Validators.required],
+      end_time: [toDatetimeLocalString(this.eventToEdit.end_time), Validators.required],
     }, {
       validators: [startBeforeEndValidator, sameDayValidator]
     });
@@ -54,6 +54,7 @@ export class EditEventModalComponent {
     const formValue = this.eventForm.value;
     const updatedEvent = {
       ...this.eventToEdit,
+      title: formValue.title,
       description: formValue.description,
       start_time: localDatetimeToUTCString(formValue.start_time),
       end_time: localDatetimeToUTCString(formValue.end_time)

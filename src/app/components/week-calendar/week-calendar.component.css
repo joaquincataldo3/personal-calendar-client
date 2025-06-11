@@ -15,7 +15,7 @@
 .weekly-grid {
   display: flex;
   font-family: sans-serif;
-   background-color: var(--white);
+  background-color: var(--white);
 }
 
 .time-column {
@@ -55,7 +55,7 @@
   flex-direction: column;
   position: relative;
   flex: 1;
-  height: 1550px;
+  height: auto;
 }
 
 .hour-slot {

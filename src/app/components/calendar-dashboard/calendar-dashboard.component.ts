@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { MonthCalendarComponent } from '../month-calendar/month-calendar.component';
 import { WeekCalendarComponent } from '../week-calendar/week-calendar.component';
 import { EventsService } from '../../services/events.service';
@@ -23,14 +23,14 @@ export class CalendarDashboardComponent implements OnInit {
   settings: IUserSetting | null = null;
   spinnerWidth = 80;
   spinnerHeight = 80;
-
   spinnerBorder = 8;
-
   isFetchingEvents: boolean = false;
-
   selectedDay: Date = new Date();
 
-  constructor(private eventsService: EventsService, private settingsService: SettingsService){}
+  constructor(
+    private eventsService: EventsService, 
+    private settingsService: SettingsService,
+    private hostRef: ElementRef){}
 
   ngOnInit(): void {
     this.isFetchingEvents = true;
@@ -76,7 +76,10 @@ export class CalendarDashboardComponent implements OnInit {
   getUserSettings(): void {
      this.settingsService.getUserSettings().subscribe((response) => {
       if(response.statusCode === 200 && response.data){
-        this.settings = response.data;
+        this.settings = {
+          ...response.data,
+          location: response.data.location ?? 'Buenos Aires'
+        }
         this.checkForBodyDarkMode();
       }
     });

@@ -1,32 +1,38 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { environment } from '../../../environment/environment';
 import { HttpClient } from '@angular/common/http';
-import { IEvent, IForecastData } from '../../../interfaces/interfaces';
+import { IEvent, IForecastData, IUserSetting } from '../../../interfaces/interfaces';
 import { toLocalDate as toLocalDateHelper } from '../../utils/datesHelper';
 import { CommonModule } from '@angular/common';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-upcoming-events-weather',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingSpinnerComponent],
   templateUrl: './upcoming-events-weather.component.html',
   styleUrl: './upcoming-events-weather.component.css'
 })
 export class UpcomingEventsWeatherComponent {
 
   @Input() events: IEvent[] = [];
-  @Input() city: string = 'Buenos Aires';
+  @Input() settings: IUserSetting | null = null;
+  city!:string;
   forecastData: IForecastData[] = [];
   API_KEY = environment.openWeatherApiKey;
+  isLoading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
     this.fetchWeather();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['events']) {
+    if (changes['events'] || changes['settings']) {
+      this.city = this.settings?.location || 'Buenos Aires';
       this.forecastData = [];
       this.fetchWeather();
     }
@@ -34,8 +40,10 @@ export class UpcomingEventsWeatherComponent {
 
   fetchWeather(): void {
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&appid=${environment.openWeatherApiKey}&units=metric`;
-
-    this.http.get<any>(apiUrl).subscribe(response => {
+    this.isLoading = true,
+    this.http.get<any>(apiUrl)
+    .pipe(finalize(() => this.isLoading = false))
+    .subscribe(response => {
       const list = response.list;
       const today = new Date();
 

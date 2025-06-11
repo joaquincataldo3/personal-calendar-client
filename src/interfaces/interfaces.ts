@@ -12,7 +12,7 @@ export interface IEvent {
     start_time: Date;
     end_time: Date;
     created_at: Date;
-    overlapIndex?: number;
+    overlap?: boolean;
 }
 
 export interface PositionedEvent extends IEvent {
