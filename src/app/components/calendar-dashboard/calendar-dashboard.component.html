@@ -5,6 +5,7 @@
                 (eventCreated)="onEventCreated($event)"
                 [ngClass]="{ 'dark-mode': settings?.dark_mode }"
                 [settings]="settings"
+                (settingsChanged)="onSettingsChanged($event)"
             ></app-user-actions>
             <app-month-calendar
                 [events]="events"

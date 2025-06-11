@@ -76,16 +76,26 @@ export class CalendarDashboardComponent implements OnInit {
   getUserSettings(): void {
      this.settingsService.getUserSettings().subscribe((response) => {
       if(response.statusCode === 200 && response.data){
-        console.log(response)
         this.settings = response.data;
-        const body = document.body;
-        if(this.settings?.dark_mode){
-          body.classList.add('body-dark-mode');
-        } else {
-          body.classList.remove('body-dark-mode')
-        }
+        this.checkForBodyDarkMode();
       }
     });
+  }
+
+  onSettingsChanged(newSettings: IUserSetting): void {
+    this.settings = newSettings;
+    this.checkForBodyDarkMode();
+  }
+
+  checkForBodyDarkMode(): void {
+    const body = document.body;
+    console.log(this.settings)
+    if(this.settings?.dark_mode){
+      body.classList.add('body-dark-mode');
+    } else {
+      body.classList.remove('body-dark-mode')
+    }
+    console.log(body.classList)
   }
 
 }

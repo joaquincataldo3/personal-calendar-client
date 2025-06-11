@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SettingsService } from '../../services/settings.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -25,13 +25,14 @@ export class UserSettingsComponent implements OnInit {
   apiErrorMessage = '';
   darkMode: boolean = false;
 
+
   constructor(
     private fb: FormBuilder,
     private settingsService: SettingsService,
     private dialogRef: MatDialogRef<UserSettingsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IUserSetting
   ) {
-    console.log(data)
+
     this.darkMode = data.dark_mode;
   }
 
@@ -60,7 +61,10 @@ export class UserSettingsComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({
+        updated: false,
+        data: null
+    });
   }
 
   onUpdateSettings(): void {
@@ -75,8 +79,10 @@ export class UserSettingsComponent implements OnInit {
       })
     ).subscribe({
       next: (res: IApiResponse) => {
-        console.log(res)
-        this.dialogRef.close();
+        this.dialogRef.close({
+          updated: true,
+          data: formValue
+        });
       },
       error: (err: any) => {
         this.apiError = true;

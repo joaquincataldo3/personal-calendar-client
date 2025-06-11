@@ -49,3 +49,8 @@ export interface IUserSetting {
     user_id?: number;
     dark_mode: boolean;
 }
+
+export interface IUserSettingUpdated {
+    updated: boolean;
+    data: IUserSetting
+}

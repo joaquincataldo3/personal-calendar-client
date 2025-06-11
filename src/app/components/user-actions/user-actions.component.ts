@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateEventModalComponent } from '../create-event-modal/create-event-modal.component';
-import { IApiResponse, IEvent, IUserSetting } from '../../../interfaces/interfaces';
+import { IApiResponse, IEvent, IUserSetting, IUserSettingUpdated } from '../../../interfaces/interfaces';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserSettingsComponent } from '../user-settings-modal/user-settings-modal.component';
@@ -18,13 +18,13 @@ export class UserActionsComponent {
   @Output() eventCreated = new EventEmitter<IEvent>();
   @Input() settings: IUserSetting | null = null;
   darkMode: boolean = false;
+  @Output() settingsChanged = new EventEmitter<IUserSetting>();
 
   constructor(
     private dialog: MatDialog, 
     private authService: AuthService,
     private router: Router
   ){
-    console.log(this.settings)
     this.darkMode = this.settings?.dark_mode ?? false;
   }
 
@@ -55,9 +55,9 @@ export class UserActionsComponent {
         dark_mode: this.darkMode
       }
     })
-    dialogRef.afterClosed().subscribe((result: IEvent) => {
-      if(result){
-        this.eventCreated.emit(result);
+    dialogRef.afterClosed().subscribe((result: IUserSettingUpdated) => {
+      if(result.updated){
+        this.settingsChanged.emit(result.data)
       }
     });
   }
