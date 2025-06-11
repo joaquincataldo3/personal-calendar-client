@@ -21,13 +21,11 @@ export class EventDescriptionModalComponent {
       @Inject(MAT_DIALOG_DATA) public data: any,
   ){
     const event = data.event;
-    console.log(event)
     this.event = {
       ...event,
       start_time: toLocalDate(event.start_time),
       end_time: toLocalDate(event.end_time)
     }
-    console.log(this.event)
     this.darkMode = data.darkMode;
   }
 
