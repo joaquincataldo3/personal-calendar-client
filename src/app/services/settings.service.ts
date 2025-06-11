@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiResponse } from '../../interfaces/interfaces';
+import { IApiResponse, IUserSetting } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,5 +18,9 @@ export class SettingsService {
 
   getUserSettings(): Observable<IApiResponse> {
     return this.http.get<IApiResponse>(`${this.baseUrl}`, {withCredentials: true});
+  }
+
+  updateUserSettings(settings: IUserSetting): Observable<IApiResponse> {
+    return this.http.put<IApiResponse>(`${this.baseUrl}`, settings, {withCredentials: true})
   }
 }

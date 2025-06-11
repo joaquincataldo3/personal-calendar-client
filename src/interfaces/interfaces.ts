@@ -33,10 +33,19 @@ export interface ICreateEventData {
 }
 
 export interface IForecastData {
-        date: Date;
+    date: Date;
     label: string;
     minTemp: number;
     maxTemp: number;
     weatherIcon: string;
     events: IEvent[];
+}
+
+export interface IUserSetting {
+    language: string;
+    timezone: string;
+    location: string;
+    id?: number;
+    user_id?: number;
+    dark_mode: boolean;
 }

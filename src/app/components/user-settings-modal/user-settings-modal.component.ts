@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SettingsService } from '../../services/settings.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { finalize } from 'rxjs/operators';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { CommonModule } from '@angular/common';
+import { IApiResponse } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-user-settings',
@@ -14,11 +16,13 @@ import { CommonModule } from '@angular/common';
 })
 export class UserSettingsComponent implements OnInit {
   form!: FormGroup;
-
   languages: { value: string, label: string }[] = [];
   timezones: { value: string, label: string }[] = [];
   locations: { value: string, label: string }[] = [];
   isLoading = false;
+  formSubmitted: boolean = false;
+  apiError = false;
+  apiErrorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -28,9 +32,9 @@ export class UserSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      language: [''],
-      timezone: [''],
-      location: [''],
+      language: ['', Validators.required],
+      timezone: ['', Validators.required],
+      location: ['', Validators.required],
       dark_mode: [false]
     });
 
@@ -55,6 +59,24 @@ export class UserSettingsComponent implements OnInit {
   }
 
   onUpdateSettings(): void {
-
+    this.formSubmitted = true;
+    if(this.form.invalid) return;
+    this.isLoading = true;
+    const formValue = this.form.value;
+    this.settingsService.updateUserSettings(formValue).pipe(
+      finalize(() => {
+        this.formSubmitted = false;
+        this.isLoading = false;
+      })
+    ).subscribe({
+      next: (res: IApiResponse) => {
+        console.log(res)
+        this.dialogRef.close();
+      },
+      error: (err: any) => {
+        this.apiError = true;
+        this.apiErrorMessage = err.error.message;
+      }
+    })
   }
 }

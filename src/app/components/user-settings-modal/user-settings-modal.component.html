@@ -2,11 +2,10 @@
   <div class="modal">
     <div class="title-close-icon-container">
         <h2 class="modal-title">Edit settings</h2>
-        <i class='bx  bx-x' (click)="onCancel()"></i> 
+        <i class='bx bx-x' (click)="onCancel()"></i> 
     </div>
     <div class="form-container">
         <form [formGroup]="form" (ngSubmit)="onUpdateSettings()" class="modal-form">
-
         <div class="edit-input-label-container">
             <label>Language</label>
             <select formControlName="language">
@@ -14,6 +13,9 @@
                 {{ lang.label }}
                 </option>
             </select>
+            <p class="error-msg" *ngIf="formSubmitted && form.get('language')?.hasError('required')">
+                Language is required
+            </p>
         </div>
 
         <div class="edit-input-label-container">
@@ -23,6 +25,9 @@
                 {{ tz.label }}
                 </option>
             </select>
+            <p class="error-msg" *ngIf="formSubmitted && form.get('timezone')?.hasError('required')">
+                Timezone is required
+            </p>
         </div>
 
         <div class="edit-input-label-container">
@@ -32,6 +37,9 @@
                 {{ loc.label }}
                 </option>
             </select>
+            <p class="error-msg" *ngIf="formSubmitted && form.get('location')?.hasError('required')">
+                Location is required
+            </p>
         </div>
 
         <div class="edit-input-label-container dark-mode-container toggle-container">
@@ -43,19 +51,14 @@
         </div>
 
         <div class="actions">
-            <button type="button" class="form-btn cancel-btn" (click)="onCancel()">Cancelar</button>
-            <button type="submit" class="form-btn">Guardar</button>
+            <button type="button" *ngIf="!isLoading" class="form-btn cancel-btn" (click)="onCancel()">Cancelar</button>
+            <button type="submit" *ngIf="!isLoading" class="form-btn">Guardar</button>
         </div>
-
-        </form>
-    </div>
-    <div class="modal-actions">
-        <ng-container *ngIf="isLoading">
             <app-loading-spinner
                 [isSpinnerActive]="isLoading"
-
             ></app-loading-spinner>
-        </ng-container>
+
+        </form>
     </div>
   </div>
 </div>
