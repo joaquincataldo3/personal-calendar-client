@@ -1,5 +1,5 @@
 # calendar app client – assessment
-frontend is built with Angular.
+frontend is built with angular
 
 ### getting started
 
