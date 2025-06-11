@@ -58,12 +58,14 @@ export class MonthCalendarComponent {
     this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
     this.updateHeader();
     this.generateDays();
+    this.selectDay(new Date(this.currentDate));
   }
 
   nextMonth(): void {
     this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
     this.updateHeader();
     this.generateDays();
+    this.selectDay(new Date(this.currentDate));
   }
 
   

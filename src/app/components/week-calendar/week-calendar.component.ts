@@ -135,7 +135,7 @@ export class WeekCalendarComponent {
 
       // 45px as the minimum height, converted to percentage of a 1320px tall container
       const containerHeightPx = 60 * 22; 
-      const minPercent = (45 / containerHeightPx) * 100;
+      const minPercent = (50 / containerHeightPx) * 100;
 
       return Math.max(percent, minPercent);
     }

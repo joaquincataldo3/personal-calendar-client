@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { MonthCalendarComponent } from '../month-calendar/month-calendar.component';
 import { WeekCalendarComponent } from '../week-calendar/week-calendar.component';
 import { EventsService } from '../../services/events.service';
@@ -27,7 +27,10 @@ export class CalendarDashboardComponent implements OnInit {
   isFetchingEvents: boolean = false;
   selectedDay: Date = new Date();
 
-  constructor(private eventsService: EventsService, private settingsService: SettingsService){}
+  constructor(
+    private eventsService: EventsService, 
+    private settingsService: SettingsService,
+    private hostRef: ElementRef){}
 
   ngOnInit(): void {
     this.isFetchingEvents = true;
