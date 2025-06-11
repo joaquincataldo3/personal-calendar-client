@@ -19,3 +19,7 @@
 .close-modal i {
     font-size: 20px;
 }
+
+.modal.modal-dark-mode {
+    color: var(--white)!important;
+}

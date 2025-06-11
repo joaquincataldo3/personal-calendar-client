@@ -3,6 +3,15 @@
     overflow-y: scroll;
 }
 
+:host-context(.dark-mode) .weekly-grid {
+  background-color: #121212;
+  color: #eeeeee;
+}
+
+:host-context(.dark-mode) .selected-day {
+  background-color: #263238;
+}
+
 .weekly-grid {
   display: flex;
   font-family: sans-serif;

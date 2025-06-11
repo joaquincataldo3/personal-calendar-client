@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MonthCalendarComponent } from '../month-calendar/month-calendar.component';
 import { WeekCalendarComponent } from '../week-calendar/week-calendar.component';
 import { EventsService } from '../../services/events.service';
-import { IApiResponse, IEditOrDeleteModalResult, IEvent } from '../../../interfaces/interfaces';
+import { IApiResponse, IEditOrDeleteModalResult, IEvent, IUserSetting } from '../../../interfaces/interfaces';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { CommonModule } from '@angular/common';
 import { UserActionsComponent } from '../user-actions/user-actions.component';
 import { toLocalDate } from '../../utils/datesHelper';
 import { UpcomingEventsWeatherComponent } from '../upcoming-events-weather/upcoming-events-weather.component';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-calendar-dashboard',
@@ -19,9 +20,8 @@ import { UpcomingEventsWeatherComponent } from '../upcoming-events-weather/upcom
 export class CalendarDashboardComponent implements OnInit {
 
   events: IEvent[] = [];
-
+  settings: IUserSetting | null = null;
   spinnerWidth = 80;
-
   spinnerHeight = 80;
 
   spinnerBorder = 8;
@@ -30,12 +30,13 @@ export class CalendarDashboardComponent implements OnInit {
 
   selectedDay: Date = new Date();
 
-  constructor(private eventsService: EventsService){}
+  constructor(private eventsService: EventsService, private settingsService: SettingsService){}
 
   ngOnInit(): void {
     this.isFetchingEvents = true;
     this.getEvents();
     this.isFetchingEvents = false;
+    this.getUserSettings();
   }
 
   onDaySelected(day: Date) {
@@ -72,4 +73,29 @@ export class CalendarDashboardComponent implements OnInit {
     }
   }
   
+  getUserSettings(): void {
+     this.settingsService.getUserSettings().subscribe((response) => {
+      if(response.statusCode === 200 && response.data){
+        this.settings = response.data;
+        this.checkForBodyDarkMode();
+      }
+    });
+  }
+
+  onSettingsChanged(newSettings: IUserSetting): void {
+    this.settings = newSettings;
+    this.checkForBodyDarkMode();
+  }
+
+  checkForBodyDarkMode(): void {
+    const body = document.body;
+    console.log(this.settings)
+    if(this.settings?.dark_mode){
+      body.classList.add('body-dark-mode');
+    } else {
+      body.classList.remove('body-dark-mode')
+    }
+    console.log(body.classList)
+  }
+
 }

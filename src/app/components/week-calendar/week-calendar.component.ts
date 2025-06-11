@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IEditOrDeleteModalResult, IEvent, PositionedEvent } from '../../../interfaces/interfaces';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { IEditOrDeleteModalResult, IEvent, IUserSetting, PositionedEvent } from '../../../interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 import { WeekEventCardComponent } from '../week-event-card/week-event-card.component';
 import { toLocalDate } from '../../utils/datesHelper';
@@ -21,12 +21,17 @@ export class WeekCalendarComponent {
     isEditModalOpen: boolean = false;
     selectedEvent: IEvent | null = null;
     @Output() eventUpdated = new EventEmitter<IEditOrDeleteModalResult>();
+    @Input() settings: IUserSetting | null = null;
+    darkMode: boolean = false;
 
     constructor(private dialog: MatDialog){}
 
-    ngOnChanges() {
+    ngOnChanges(changes: SimpleChanges) {
       if (this.selectedDay) {
         this.generateWeek(this.selectedDay);
+      }
+      if (changes['settings'] && this.settings) {
+        this.darkMode = this.settings.dark_mode;
       }
     }
 
@@ -145,7 +150,10 @@ export class WeekCalendarComponent {
 
     openEditModal(event: IEvent): void {
         const dialogRef = this.dialog.open(EditEventModalComponent, {
-          data: event,
+          data: {
+            event,
+            darkMode: this.darkMode
+          },
           width: '400px', 
         });
 

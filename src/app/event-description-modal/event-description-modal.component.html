@@ -1,5 +1,5 @@
 <div class="modal-backdrop">
-  <div class="modal">
+  <div class="modal" [ngClass]="{'modal-dark-mode': darkMode}">
     <div class="close-modal">
         <i class='bx  bx-x' (click)="onCancel()"></i>
     </div>

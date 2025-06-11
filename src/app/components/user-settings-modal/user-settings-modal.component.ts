@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SettingsService } from '../../services/settings.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { finalize } from 'rxjs/operators';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { CommonModule } from '@angular/common';
-import { IApiResponse } from '../../../interfaces/interfaces';
+import { IApiResponse, IUserSetting } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-user-settings',
@@ -23,12 +23,18 @@ export class UserSettingsComponent implements OnInit {
   formSubmitted: boolean = false;
   apiError = false;
   apiErrorMessage = '';
+  darkMode: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
     private settingsService: SettingsService,
-    private dialogRef: MatDialogRef<UserSettingsComponent>
-  ) {}
+    private dialogRef: MatDialogRef<UserSettingsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IUserSetting
+  ) {
+
+    this.darkMode = data.dark_mode;
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -55,7 +61,10 @@ export class UserSettingsComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({
+        updated: false,
+        data: null
+    });
   }
 
   onUpdateSettings(): void {
@@ -70,8 +79,10 @@ export class UserSettingsComponent implements OnInit {
       })
     ).subscribe({
       next: (res: IApiResponse) => {
-        console.log(res)
-        this.dialogRef.close();
+        this.dialogRef.close({
+          updated: true,
+          data: formValue
+        });
       },
       error: (err: any) => {
         this.apiError = true;
