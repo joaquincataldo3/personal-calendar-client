@@ -6,8 +6,11 @@
         <span class="date-label">{{ item.date | date: 'd/M/yyyy' }}</span>
       </div>
       <div class="weather-info">
-        <span class="temp">{{ item.minTemp }}°/{{ item.maxTemp }}°</span>
-        <img class="weather-src" [src]="'https://openweathermap.org/img/wn/' + item.weatherIcon + '@2x.png'" alt="clima">
+        <span class="temp" *ngIf="item.minTemp !== null; else noTemp">{{ item.minTemp }}°/{{ item.maxTemp }}°</span>
+        <ng-template #noTemp>
+          <span><i class='bx  bx-thermometer'></i> N/A</span>
+        </ng-template>
+        <img *ngIf="item.minTemp !== null" class="weather-src" [src]="'https://openweathermap.org/img/wn/' + item.weatherIcon + '@2x.png'" alt="clima">
       </div>
     </div>
     <div class="events-container">

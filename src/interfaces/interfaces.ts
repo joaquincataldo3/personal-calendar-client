@@ -35,8 +35,8 @@ export interface ICreateEventData {
 export interface IForecastData {
     date: Date;
     label: string;
-    minTemp: number;
-    maxTemp: number;
+    minTemp: number | null;
+    maxTemp: number | null;
     weatherIcon: string;
     events: IEvent[];
 }

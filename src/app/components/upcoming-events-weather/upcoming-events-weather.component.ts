@@ -50,7 +50,7 @@ export class UpcomingEventsWeatherComponent {
           const dt = toLocalDateHelper(entry.dt_txt);
           return dt.toDateString() === dayStr;
         });
-
+        
         const temps = forecasts.map((f: any) => f.main.temp);
         const icons = forecasts.map((f: any) => f.weather[0].icon);
 
@@ -59,11 +59,14 @@ export class UpcomingEventsWeatherComponent {
           return local.toDateString() === dayStr;
         });
 
+        const minTemp = temps.length > 0 ? Math.round(Math.min(...temps)) : null;
+        const maxTemp = temps.length > 0 ? Math.round(Math.max(...temps)) : null;
+
         this.forecastData.push({
           date,
           label: this.getLabel(offset, date),
-          minTemp: Math.round(Math.min(...temps)),
-          maxTemp: Math.round(Math.max(...temps)),
+          minTemp,
+          maxTemp,
           weatherIcon: icons[4] || icons[0] || '01d',
           events: dailyEvents
         });
