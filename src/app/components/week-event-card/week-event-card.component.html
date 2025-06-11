@@ -3,7 +3,7 @@
      {{ getLocalTimeString(event.start_time) }}
   </p>
   <div class="actions-title-container">
-    <p class="event-title">{{ event.title }}</p>
+    <p class="event-title">{{ event.title | conditionalTruncate: !!event.overlap : 5 }}</p>
     <div class="actions-container">
          <i class='bx bx-plus-circle' *ngIf="event.description" (click)="onSeeMoreClick()"></i> 
          <i class='bx bx-edit-alt' (click)="onEditClick()"></i> 

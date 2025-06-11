@@ -4,17 +4,20 @@ import { IEvent } from '../../../interfaces/interfaces';
 import { toLocalDate } from '../../utils/datesHelper';
 import { EventDescriptionModalComponent } from '../../event-description-modal/event-description-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ConditionalTruncatePipe } from '../../pipes/conditional-truncate.pipe';
 
 @Component({
   selector: 'app-week-event-card',
   standalone: true,
-  imports: [CommonModule, EventDescriptionModalComponent],
+  imports: [CommonModule, EventDescriptionModalComponent, ConditionalTruncatePipe],
   templateUrl: './week-event-card.component.html',
   styleUrl: './week-event-card.component.css'
 })
 export class WeekEventCardComponent {
 
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog){
+    
+  }
 
   @Input() event!: IEvent;
   @Output() editClicked = new EventEmitter<IEvent>();
