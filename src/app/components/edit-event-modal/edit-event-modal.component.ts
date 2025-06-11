@@ -58,7 +58,6 @@ export class EditEventModalComponent {
       start_time: localDatetimeToUTCString(formValue.start_time),
       end_time: localDatetimeToUTCString(formValue.end_time)
     };
-    console.log(updatedEvent)
     this.eventsService.editEvent(updatedEvent).pipe(
       finalize(() => {
         this.isLoading = false;
