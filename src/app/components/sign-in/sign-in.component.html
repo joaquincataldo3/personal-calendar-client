@@ -17,6 +17,8 @@
       </div>
     </div>
 
+    <p class="pre-link-text">Don't have an account? <span class="link" (click)="onRegisterRedirect()">Register here</span></p>
+
     <button class="form-btn" type="submit" *ngIf="!isLoading">Sign in</button>
     <app-loading-spinner
         [isSpinnerActive] = "isLoading"

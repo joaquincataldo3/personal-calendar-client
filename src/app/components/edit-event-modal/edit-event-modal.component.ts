@@ -31,7 +31,6 @@ export class EditEventModalComponent {
     private eventsService: EventsService,
   ) {
     this.eventToEdit = data;
-    console.log(this.eventToEdit)
     this.eventForm = this.fb.group({
       title: [data.title, Validators.required],
       description: [data.description],

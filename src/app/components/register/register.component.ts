@@ -64,13 +64,18 @@ export class RegisterComponent {
   }
 
   strongPasswordValidator(control: AbstractControl): ValidationErrors | null {
-  const value = control.value;
-  if (!value) return null;
+    const value = control.value;
+    if (!value) return null;
 
-  const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
+    // at least 1 uppercase, 1 special char and 8 char length
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
 
-  return passwordRegex.test(value) ? null : { strongPassword: true };
-}
+    return passwordRegex.test(value) ? null : { strongPassword: true };
+  }
+
+  onSignInRedirect(): void {
+    this.router.navigate(['/sign-in'])
+  }
 
 }
 
