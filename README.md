@@ -11,6 +11,11 @@ cd personal-calendar-client
 
 ### 2 - if not installed, nodejs is necessary (>= 18)
 
+## 3 - if installed already, uninstall angular cli
+```bash
+  npm uninstall -g @angular/cli
+```
+
 ### 3 - if not installed already, install angular cli
 ```bash
   npm install -g @angular/cli@17.3.17
