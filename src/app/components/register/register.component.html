@@ -1,5 +1,5 @@
 <div class="form-container">
-    <h1>Register form</h1>
+    <h1>Register</h1>
     <p *ngIf="apiError" class="error-msg">{{apiErrorMessage}}</p>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
       <div class="input-label-container">
@@ -20,6 +20,8 @@
         </div>
       </div>
     
+      <p class="pre-link-text">Already have an account? <span class="link" (click)="onSignInRedirect()">Sign in here</span></p>
+
       <button class="form-btn" type="submit" *ngIf="!isLoading">Register</button>
       <app-loading-spinner
         [isSpinnerActive] = "isLoading"

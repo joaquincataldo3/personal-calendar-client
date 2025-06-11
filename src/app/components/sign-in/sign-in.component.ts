@@ -18,7 +18,7 @@ export class SignInComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   formSubmitted = false;
@@ -60,5 +60,9 @@ export class SignInComponent {
         }
       })
     }
+  }
+
+  onRegisterRedirect(): void {
+    this.router.navigate(['/register'])
   }
 }
