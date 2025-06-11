@@ -4,6 +4,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { noAuthGuard } from './guards/no-auth.guard';
 import { CalendarDashboardComponent } from './components/calendar-dashboard/calendar-dashboard.component';
 import { authGuard } from './guards/auth.guard';
+import { RedirectComponent } from './components/redirect/redirect.component';
 
 export const routes: Routes = [
   { path: 'register', 
@@ -19,6 +20,7 @@ export const routes: Routes = [
     path: 'calendar',
     component: CalendarDashboardComponent,
     canActivate: [authGuard]
-  }
+  },
+  { path: '**', component: RedirectComponent }
 ];
 

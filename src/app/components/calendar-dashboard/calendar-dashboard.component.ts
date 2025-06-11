@@ -89,13 +89,11 @@ export class CalendarDashboardComponent implements OnInit {
 
   checkForBodyDarkMode(): void {
     const body = document.body;
-    console.log(this.settings)
     if(this.settings?.dark_mode){
       body.classList.add('body-dark-mode');
     } else {
       body.classList.remove('body-dark-mode')
     }
-    console.log(body.classList)
   }
 
 }
