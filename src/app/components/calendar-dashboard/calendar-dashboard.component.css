@@ -1,9 +1,8 @@
 .calendar-dashboard-container {
-    width: 80%;
-    height: 80vh;
-    margin: 35px auto;
+    width: 90%;
+    height: 90vh;
+    margin: 25px auto;
     display: flex;
-   
 }
 
 .calendar-dashboard-left-column {
@@ -15,3 +14,9 @@
     width: 100%;
 }
 
+@media(min-width: 1400px){
+    .calendar-dashboard-container {
+        width: 80%;
+        height: 80vh;
+    }
+}

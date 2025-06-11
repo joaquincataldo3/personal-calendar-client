@@ -43,6 +43,7 @@
 .actions-container {
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 .actions-container i {
@@ -52,4 +53,5 @@
 
 .actions-container i:first-child {
     margin-right: 5px;
+    margin-bottom: 5px;
 }

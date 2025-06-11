@@ -3,6 +3,23 @@
     overflow-y: scroll;
 }
 
+:host::-webkit-scrollbar {
+  width: 8px;
+}
+
+:host::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:host::-webkit-scrollbar-thumb {
+  background-color: var(--light-grey);
+  border-radius: 10px;
+}
+
+:host::-webkit-scrollbar-thumb:hover {
+  background-color: var(--light-grey);
+}
+
 :host-context(.dark-mode) .weekly-grid {
   background-color: #121212;
   color: #eeeeee;
