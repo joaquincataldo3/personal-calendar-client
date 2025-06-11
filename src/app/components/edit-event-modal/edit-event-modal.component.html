@@ -10,7 +10,7 @@
             <div class="input-label-container">
                 <input type="text" formControlName="title">
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.get('title')?.hasError('required')">
-                    Title is required.
+                    Title is required
                 </p>
             </div>
             <div class="input-label-container">
@@ -20,10 +20,10 @@
                 <p>Start time</p>
                 <input type="datetime-local" formControlName="start_time">
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.hasError('notSameDay')">
-                  Start and end time must be on the same day.
+                  Start and end time must be on the same day
                 </p>
                 <p class="error-msg" *ngIf="formSubmitted && eventForm.hasError('startAfterEnd')">
-                    Start time must be before end time.
+                    Start time must be before end time
                 </p>
             </div>
             <div class="input-label-container">
