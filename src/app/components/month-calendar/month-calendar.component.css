@@ -80,3 +80,9 @@
     font-size: 14px;
     color: var(--white);
 }
+
+@media(min-width: 1400px){
+    .calendar-header {
+        margin-top: 20px;
+    }
+}

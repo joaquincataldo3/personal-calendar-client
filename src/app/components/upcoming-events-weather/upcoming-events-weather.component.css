@@ -138,3 +138,10 @@
   display: flex;
   justify-content: center;
 }
+
+@media(min-width: 1400px){
+    .city-label {
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+}
